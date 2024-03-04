@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "154016756693",
+    "project_id": "ticketonlineapp-f6802",
+    "storage_bucket": "ticketonlineapp-f6802.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:154016756693:android:ac83a1ef2d7792a113c35c",
+        "android_client_info": {
+          "package_name": "com.example.ticketonlineapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAD8knnBvS6cYOe6LmvCfMNQCjv7hhjKco"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
