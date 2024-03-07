@@ -19,18 +19,20 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/Theme.TicketOnlineApp"
+        android:theme="@style/Theme.TicketOnlineApp.NoActionBar"
         tools:targetApi="31">
         <activity
-            android:name=".SplashActivity"
+            android:name=".Activity.User.SplashActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.User.OnboardingActivity"
             android:exported="true"
-            android:label="@string/title_activity_splash"
-            android:theme="@style/Theme.TicketOnlineApp.NoActionBar">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+            android:label="@string/title_activity_splash">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 
