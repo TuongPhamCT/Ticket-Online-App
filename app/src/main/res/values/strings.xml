@@ -10,4 +10,18 @@
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="title_activity_splash">SplashActivity</string>
+
+<!--    -->
+<!--    String used for activity_home-->
+    <string name = "find_your_best_movie">Find your Best Movie </string>
+    <string name = "now_playing">Now Playing</string>
+    <string name = "view_all">View all</string>
+    <string name = "coming_soon">Coming soon</string>
+    <string name = "expired_movie">Expired Movie</string>
+    <string name = "promotions">Promotions</string>
+    <string name = "services">Services</string>
+    <string name = "cities">Cities</string>
+<!--    -->
+
+
 </resources>
