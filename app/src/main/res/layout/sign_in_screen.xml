@@ -73,15 +73,15 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/EmailET"
                     android:layout_width="match_parent"
-                    android:layout_height="90dp"
+                    android:layout_height="wrap_content"
                     android:defaultFocusHighlightEnabled="true"
                     android:fontFamily="@font/montserrat_regular"
                     android:inputType="textEmailAddress"
-                    android:paddingTop="20dp"
+                    android:paddingTop="20sp"
                     android:singleLine="true"
                     android:textColor="@color/white_background"
                     android:textColorHint="@color/hint_color"
-                    android:textSize="16sp" />
+                    android:textSize="14sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -108,32 +108,32 @@
                 app:helperTextEnabled="true"
                 app:helperTextTextColor="@color/main_color"
                 app:passwordToggleDrawable="@drawable/show_password_selector"
-              >
-
+                >
                 <com.google.android.material.textfield.TextInputEditText
+                    android:paddingTop="20sp"
                     android:id="@+id/PasswordET"
-                    android:layout_width="match_parent"
-                    android:layout_height="83dp"
-                    android:fontFamily="@font/montserrat_regular"
-                    android:inputType="textPassword"
-                    android:paddingTop="20dp"
                     android:textColor="@color/white_background"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:textColorHint="@color/hint_color"
-                    android:textSize="16sp" />
+                    android:fontFamily="@font/montserrat_regular"
+                    android:textSize="14sp"
+                    android:inputType="textPassword"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
-                android:id="@+id/ForgotPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins_regular"
                 android:gravity="right"
                 android:text="Forgot Password?"
-
-                android:textColor="@color/white_background"
+                android:fontFamily="@font/poppins_regular"
                 android:textFontWeight="400"
 
-                android:textSize="16sp" />
+                android:textColor="@color/white_background"
+                android:textSize="12sp"
+
+                android:id="@+id/ForgotPassword"
+                />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/LoginBtn"
@@ -157,29 +157,28 @@
                 android:orientation="horizontal"
                 android:layout_marginTop="21dp"
                 android:gravity="center">
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/montserrat_regular"
                     android:text="Create new account? "
-                    android:textColor="@color/white_background"
+                    android:fontFamily="@font/montserrat_regular"
                     android:textFontWeight="400"
-                    android:textSize="16sp" />
-
+                    android:textSize="14sp"
+                    android:textColor="@color/white_background"/>
                 <TextView
-                    android:id="@+id/SignUp"
-                    style="@style/TextAppearance.AppCompat.Large"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:fontFamily="@font/montserrat_regular"
                     android:gravity="center"
                     android:text="Sign up"
-                    android:textColor="@color/signup_color1"
+                    android:fontFamily="@font/montserrat_regular"
                     android:textFontWeight="500"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:textColor="@color/signup_color1"
+                    android:textSize="14sp"
+                    android:layout_marginLeft="10sp"
+                    style="@style/TextAppearance.AppCompat.Large"
+                    android:id="@+id/SignUp"
+                    />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"

@@ -42,6 +42,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.ticketonlineapp.R;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
@@ -79,12 +81,22 @@ public class SignInActivity extends AppCompatActivity {
     private TextView forgotPasswordTv;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        if (getIntent().getBooleanExtra("EXIT", false)) {
-            finish();
-        }
         super.onCreate(savedInstanceState);
+
+        setContentView(R.layout.sign_in_screen);
+        TextView signUp = findViewById(R.id.SignUp);
+        emailET = findViewById(R.id.EmailET);
+        passwordET = findViewById(R.id.PasswordET);
+        LoginBtn = findViewById(R.id.LoginBtn);
+        GoogleLogin = findViewById(R.id.GoogleLogin);
+        FacebookLogin = findViewById(R.id.FacebookLogin);
         GoogleLogin.setVisibility(View.GONE);
         FacebookLogin.setVisibility(View.GONE);
+        forgotPasswordTv = findViewById(R.id.ForgotPassword);
+        passwordLayout = findViewById(R.id.layoutPassword);
+        emailLayout = findViewById(R.id.emailLayout);
+        LinearLayout layoutElement = findViewById(R.id.SignInLayout); // Replace with your actual layout element ID
+
         emailET.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -171,18 +183,7 @@ public class SignInActivity extends AppCompatActivity {
     }
 
     void LoginWithEmail() {
-        boolean error = false;
-        if (emailET.length() == 0) {
-            emailLayout.setError("Email is not empty!!!");
-            error=true;
-        }
-        if (passwordET.length() == 0) {
-            passwordLayout.setError("Password is not empty!!!");
-            error=true;
-        }
 
-        if(!error)
-            SignIn(emailET.getText().toString(), passwordET.getText().toString());
     }
 
     void SignIn(String email, String password) {
