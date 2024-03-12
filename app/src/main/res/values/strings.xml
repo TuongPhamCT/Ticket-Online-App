@@ -22,6 +22,6 @@
     <string name="services">Services</string>
     <string name="cities">Cities</string>
     <!--    -->
-
+    <string name="selected_item">Select city/ province</string>
 
 </resources>
