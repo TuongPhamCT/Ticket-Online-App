@@ -1,4 +1,4 @@
-package com.example.ticketonlineapp.Activity.User;
+package com.example.ticketonlineapp.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
