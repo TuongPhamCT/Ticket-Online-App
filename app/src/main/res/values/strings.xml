@@ -23,5 +23,18 @@
     <string name="cities">Cities</string>
     <!--    -->
 
-
+    <!--    -->
+    <!--    String used for activity_movie_checkout-->
+    <string name="checkout_movie">Checkout Movie</string>
+    <string name="order_id">ID Order</string>
+    <string name="cinema">Cinema</string>
+    <string name="date_and_time">Date &amp; Time</string>
+    <string name="seat_number">Seat Number</string>
+    <string name="price">Price</string>
+    <string name="choose_a_promotion_card">Choose a promo card</string>
+    <string name="select_voucher">+ Select voucher</string>
+    <string name="total">Total</string>
+    <string name="your_wallet">Your Wallet</string>
+    <string name="checkout">Checkout</string>
+    <!--    -->
 </resources>

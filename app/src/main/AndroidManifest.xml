@@ -22,7 +22,7 @@
         android:theme="@style/Theme.TicketOnlineApp.NoActionBar"
         tools:targetApi="31">
         <activity
-            android:name=".Activity.User.SplashActivity"
+            android:name=".Activity.Booking.MovieCheckoutActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,6 +31,9 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".Activity.User.SplashActivity"
+            android:exported="false"/>
+        <activity
             android:name=".Activity.User.HomeActivity"
             android:exported="false" />
         <activity
@@ -38,7 +41,7 @@
             android:exported="false" />
         <activity
             android:name=".Activity.User.OnboardingActivity"
-            android:exported="false"></activity>
+            android:exported="false" />
     </application>
 
 </manifest>
