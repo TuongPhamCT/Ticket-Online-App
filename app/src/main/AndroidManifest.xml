@@ -22,13 +22,7 @@
         android:theme="@style/Theme.TicketOnlineApp.NoActionBar"
         tools:targetApi="31">
         <activity
-            android:name=".Activity.User.OnboardingActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Activity.User.ConfirmationProfileActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Activity.User.SplashActivity"
+            android:name=".Activity.User.SignInActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -36,6 +30,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".Activity.User.HomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.User.ConfirmationProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.User.OnboardingActivity"
+            android:exported="false"></activity>
     </application>
 
 </manifest>
