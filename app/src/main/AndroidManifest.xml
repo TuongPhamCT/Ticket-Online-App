@@ -54,6 +54,9 @@
         <activity
             android:name=".Activity.Booking.SelectCinemaActivity"
             android:exported="false" />
+        <activity
+            android:name=".Activity.Booking.SuccessCheckoutActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

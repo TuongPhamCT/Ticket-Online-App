@@ -8,7 +8,9 @@ import android.os.Bundle;
 
 import com.example.ticketonlineapp.Activity.Network.CheckNetwork;
 import com.example.ticketonlineapp.R;
+
 import com.google.firebase.FirebaseApp;
+
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -29,6 +31,7 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
         FirebaseApp.initializeApp(this);
     }
 }

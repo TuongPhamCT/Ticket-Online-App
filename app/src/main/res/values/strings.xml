@@ -24,6 +24,15 @@
     <string name="CheckUsed">CheckUsed</string>
     <!--    -->
 
+
+    <!--    -->
+    <!--    String used for activity_success_checkout-->
+    <string name = "happy_watching">Happy Watching!</string>
+    <string name = "inform_ticket_buying_successfully">You have successfully bought the ticket</string>
+    <string name = "my_ticket">My Ticket</string>
+    <string name = "discover_new_movie">Discover new movie?</string>
+    <string name = "back_to_home">Back to home</string>
+
     <string name="selected_item">Select city/ province</string>
 
 
@@ -40,5 +49,6 @@
     <string name="total">Total</string>
     <string name="your_wallet">Your Wallet</string>
     <string name="checkout">Checkout</string>
+
     <!--    -->
 </resources>
