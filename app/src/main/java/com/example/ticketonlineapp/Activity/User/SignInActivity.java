@@ -4,28 +4,18 @@ import static android.content.ContentValues.TAG;
 
 import static com.example.ticketonlineapp.Database.FirebaseRequests.mAuth;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.TaskStackBuilder;
 import android.content.Context;
 import android.content.Intent;
 
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.app.ActivityCompat;
 
 import android.content.IntentFilter;
-import android.content.IntentSender;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
-import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -33,7 +23,6 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -45,6 +34,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.ticketonlineapp.Activity.HomeActivity;
 import com.example.ticketonlineapp.Activity.Network.CheckNetwork;
 import com.example.ticketonlineapp.Database.FirebaseRequests;
 import com.example.ticketonlineapp.Model.Users;
@@ -68,7 +58,6 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.ktx.Firebase;
 
 import java.util.ArrayList;
 
@@ -142,7 +131,6 @@ public class SignInActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
-
             }
         });
         passwordET.addTextChangedListener(new TextWatcher() {
@@ -152,17 +140,15 @@ public class SignInActivity extends AppCompatActivity {
             }
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
             }
             @Override
             public void afterTextChanged(Editable editable) {
-
             }
         });
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                SignUp();
             }
         });
 
@@ -331,8 +317,8 @@ public class SignInActivity extends AppCompatActivity {
     }
 
     void SignUp() {
-        //Intent i = new Intent(getApplicationContext(), SignUpActivity.class);
-        //startActivity(i);
+        Intent i = new Intent(getApplicationContext(), SignUpActivity.class);
+        startActivity(i);
     }
     void LoginWithEmail() {
         boolean error = false;
@@ -402,7 +388,6 @@ public class SignInActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-
         super.onBackPressed();
     }
 }
