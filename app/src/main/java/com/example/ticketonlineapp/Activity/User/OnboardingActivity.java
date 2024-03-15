@@ -2,7 +2,11 @@ package com.example.ticketonlineapp.Activity.User;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import static com.example.ticketonlineapp.R.string.CheckUsed;
+
+import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.View;
@@ -32,11 +36,14 @@ public class OnboardingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.onboarding_screen);
 
+        SetSharedReference();
+
         Button getStartedBtn = findViewById(R.id.getStartedBtn);
         getStartedBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent i = new Intent(getApplicationContext(), SignUpActivity.class);
+                startActivity(i);
             }
         });
 
@@ -44,8 +51,18 @@ public class OnboardingActivity extends AppCompatActivity {
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent i = new Intent(getApplicationContext(), SignInActivity.class);
+                startActivity(i);
             }
         });
+    }
+    void SetSharedReference()
+    {
+        SharedPreferences sharedPref = getSharedPreferences("shared_prefs",0);
+        SharedPreferences.Editor editor= sharedPref.edit();
+        editor.clear();
+        editor.putBoolean(String.valueOf(CheckUsed), true);
+        editor.apply();
+        editor.commit();
     }
 }
