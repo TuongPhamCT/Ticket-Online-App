@@ -22,8 +22,8 @@
         android:theme="@style/Theme.TicketOnlineApp.NoActionBar"
         tools:targetApi="31">
         <activity
-            android:name=".Activity.User.HomeActivity"
-            android:exported="true" >
+            android:name=".Activity.User.SplashActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -31,16 +31,32 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activity.User.OnboardingActivity"
+            android:name=".Activity.User.SignInActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.HomeActivity"
             android:exported="false" />
         <activity
             android:name=".Activity.User.ConfirmationProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.User.SplashActivity"
-            android:exported="false">
-
-        </activity>
+            android:name=".Activity.User.OnboardingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.User.SignUpActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.Booking.MovieCheckoutActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.Booking.ChooseSeatActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.Booking.SelectCinemaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.Booking.SuccessCheckoutActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

@@ -11,17 +11,44 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="title_activity_splash">SplashActivity</string>
 
-<!--    -->
-<!--    String used for activity_home-->
-    <string name = "find_your_best_movie">Find your Best Movie </string>
-    <string name = "now_playing">Now Playing</string>
-    <string name = "view_all">View all</string>
-    <string name = "coming_soon">Coming soon</string>
-    <string name = "expired_movie">Expired Movie</string>
-    <string name = "promotions">Promotions</string>
-    <string name = "services">Services</string>
-    <string name = "cities">Cities</string>
-<!--    -->
+    <!--    -->
+    <!--    String used for activity_home-->
+    <string name="find_your_best_movie">Find your Best Movie </string>
+    <string name="now_playing">Now Playing</string>
+    <string name="view_all">View all</string>
+    <string name="coming_soon">Coming soon</string>
+    <string name="expired_movie">Expired Movie</string>
+    <string name="promotions">Promotions</string>
+    <string name="services">Services</string>
+    <string name="cities">Cities</string>
+    <string name="CheckUsed">CheckUsed</string>
+    <!--    -->
 
 
+    <!--    -->
+    <!--    String used for activity_success_checkout-->
+    <string name = "happy_watching">Happy Watching!</string>
+    <string name = "inform_ticket_buying_successfully">You have successfully bought the ticket</string>
+    <string name = "my_ticket">My Ticket</string>
+    <string name = "discover_new_movie">Discover new movie?</string>
+    <string name = "back_to_home">Back to home</string>
+
+    <string name="selected_item">Select city/ province</string>
+
+
+    <!--    -->
+    <!--    String used for activity_movie_checkout-->
+    <string name="checkout_movie">Checkout Movie</string>
+    <string name="order_id">ID Order</string>
+    <string name="cinema">Cinema</string>
+    <string name="date_and_time">Date &amp; Time</string>
+    <string name="seat_number">Seat Number</string>
+    <string name="price">Price</string>
+    <string name="choose_a_promotion_card">Choose a promo card</string>
+    <string name="select_voucher">+ Select voucher</string>
+    <string name="total">Total</string>
+    <string name="your_wallet">Your Wallet</string>
+    <string name="checkout">Checkout</string>
+
+    <!--    -->
 </resources>
