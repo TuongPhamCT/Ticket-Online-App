@@ -24,6 +24,9 @@
     <string name="CheckUsed">CheckUsed</string>
     <!--    -->
 
+    <string name="selected_item">Select city/ province</string>
+
+
     <!--    -->
     <!--    String used for activity_movie_checkout-->
     <string name="checkout_movie">Checkout Movie</string>
