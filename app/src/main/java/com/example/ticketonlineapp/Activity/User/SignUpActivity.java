@@ -280,9 +280,9 @@ public class SignUpActivity extends AppCompatActivity {
         String urlAvatar;
         if(url == null){
             urlAvatar = "https://firebasestorage.googleapis.com/v0/b/ticketonlineapp-f6802.appspot.com/o/avatar.png?alt=media&token=32fd7163-5fa8-4a90-b70e-75b97f31015a";
-
         }
         else urlAvatar = url;
+
         FirebaseRequests.mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
