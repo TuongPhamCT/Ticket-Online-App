@@ -9,12 +9,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.app.TaskStackBuilder;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -24,6 +27,7 @@ import com.example.ticketonlineapp.Activity.Network.CheckNetwork;
 import com.example.ticketonlineapp.Database.FirebaseRequests;
 import com.example.ticketonlineapp.Model.Users;
 import com.example.ticketonlineapp.R;
+import com.example.ticketonlineapp.databinding.ActivityEditAccountBinding;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseUser;
@@ -41,15 +45,11 @@ import java.util.Objects;
 import java.util.UUID;
 
 public class EditAccountActivity extends AppCompatActivity {
+    ActivityEditAccountBinding binding;
     CheckNetwork checkNetwork = new CheckNetwork();
-    EditText fullNameET;
-    EditText emailET;
-
-    ImageView addImage;
-    RoundedImageView avatarImg;
+    Uri filePath;
     UploadTask uploadTask;
     String cinemaImg;
-    Uri filePath;
     String img;
     FirebaseUser currentUser = FirebaseRequests.mAuth.getCurrentUser();
     StorageReference storageReference = FirebaseStorage.getInstance().getReference();
@@ -58,13 +58,14 @@ public class EditAccountActivity extends AppCompatActivity {
             new ActivityResultCallback<ActivityResult>() {
                 @Override
                 public void onActivityResult(ActivityResult result) {
+
                     if (result.getResultCode() == Activity.RESULT_OK) {
                         // There are no request codes
                         Intent data = result.getData();
                         if (data.getData() != null) {
                             filePath = data.getData();
 
-                            avatarImg.setImageURI(filePath);
+                            binding.avatarImg.setImageURI(filePath);
                             img = UUID.randomUUID().toString();
 
                             StorageReference ref
@@ -98,36 +99,37 @@ public class EditAccountActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_account);
-        addImage = findViewById(R.id.add_image);
-        avatarImg = findViewById(R.id.avatar_img);
-        fullNameET = findViewById(R.id.full_name);
-        emailET = findViewById(R.id.email_address);
+
+        binding = ActivityEditAccountBinding.inflate(getLayoutInflater());
+        View focusedView = getCurrentFocus();
+        if (focusedView != null) {
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(focusedView.getWindowToken(), 0);
+        }
+        setContentView(binding.getRoot());
 
         FirebaseRequests.database.collection("Users").document(Objects.requireNonNull(FirebaseRequests.mAuth.getCurrentUser()).getUid()).get().addOnSuccessListener(documentSnapshot -> {
             Users user = documentSnapshot.toObject(Users.class);
             assert user != null;
-            fullNameET.setText(user.getName());
-            emailET.setText(user.getEmail());
-            Picasso.get().load(user.getAvatar()).into(avatarImg);
+            binding.fullName.setText(user.getName());
+            binding.emailAddress.setText(user.getEmail());
+            Picasso.get().load(user.getAvatar()).into(binding.avatarImg);
         });
-        addImage.setOnClickListener(view -> {
+        binding.addImage.setOnClickListener(view -> {
             Intent intent = new Intent(Intent.ACTION_PICK);
             intent.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
             activityLaunch.launch(intent);
         });
-        Button backBt = findViewById(R.id.backbutton);
-        backBt.setOnClickListener(view -> finish());
-        Button UpdateBtn = findViewById(R.id.UpdateBtn);
-        UpdateBtn.setOnClickListener(view -> UpdateUser());
+        binding.backButton.setOnClickListener(view -> finish());
+        binding.UpdateBtn.setOnClickListener(view -> UpdateUser());
 
     }
 
     void UpdateUser() {
-        if (fullNameET.length() == 0) {
-            fullNameET.setError("Full Name is not empty!!!");
-        } else if (emailET.length() == 0) {
-            emailET.setError("Email is not empty!!!");
+        if (binding.fullName.length() == 0) {
+            binding.fullName.setError("Full Name is not empty!!!");
+        } else if (binding.emailAddress.length() == 0) {
+            binding.emailAddress.setError("Email is not empty!!!");
         } else {
             Update();
             finish();
@@ -136,28 +138,28 @@ public class EditAccountActivity extends AppCompatActivity {
     }
 
     void Update() {
-        if (!emailET.getText().toString().equals(Objects.requireNonNull(FirebaseRequests.mAuth.getCurrentUser()).getEmail()))
+        if (!binding.emailAddress.getText().toString().equals(Objects.requireNonNull(FirebaseRequests.mAuth.getCurrentUser()).getEmail()))
             UpdateEmail();
-        if (!fullNameET.getText().toString().equals(FirebaseRequests.mAuth.getCurrentUser().getDisplayName()))
+        if (!binding.fullName.getText().toString().equals(FirebaseRequests.mAuth.getCurrentUser().getDisplayName()))
             UpdateFullName();
     }
 
     void UpdateFullName() {
         UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                .setDisplayName(fullNameET.getText().toString())
+                .setDisplayName(binding.fullName.getText().toString())
                 .build();
         Objects.requireNonNull(FirebaseRequests.mAuth.getCurrentUser()).updateProfile(profileUpdates).addOnCompleteListener(task -> {
             if (!task.isSuccessful()) {
                 UpdateError("Full Name");
             }
         });
-        FirebaseRequests.database.collection("Users").document(currentUser.getUid()).update("Name", fullNameET.getText().toString());
+        FirebaseRequests.database.collection("Users").document(currentUser.getUid()).update("Name", binding.fullName.getText().toString());
 
     }
 
     void UpdateEmail() {
         Objects.requireNonNull(FirebaseRequests.mAuth.getCurrentUser())
-                .verifyBeforeUpdateEmail(emailET.getText().toString()).addOnCompleteListener(task -> {
+                .verifyBeforeUpdateEmail(binding.emailAddress.getText().toString()).addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         FirebaseRequests.mAuth.signOut();
                         Intent loginIntent = new Intent(EditAccountActivity.this, SignInActivity.class);
@@ -166,7 +168,7 @@ public class EditAccountActivity extends AppCompatActivity {
                         UpdateError("Email");
                     }
                 });
-        FirebaseRequests.database.collection("Users").document(currentUser.getUid()).update("Email", emailET.getText().toString());
+        FirebaseRequests.database.collection("Users").document(currentUser.getUid()).update("Email", binding.emailAddress.getText().toString());
     }
 
     void UpdateError(String error) {
