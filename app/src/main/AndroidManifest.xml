@@ -22,20 +22,21 @@
         android:theme="@style/Theme.TicketOnlineApp.NoActionBar"
         tools:targetApi="31">
         <activity
+            android:name=".Activity.User.EditAccountActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activity.Ticket.MyTicketActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".Activity.User.SignInActivity"
             android:exported="false" />
         <activity
             android:name=".Activity.HomeActivity"
-            android:exported="false" />
+            android:exported="true">
+
+        </activity>
         <activity
             android:name=".Activity.User.ConfirmationProfileActivity"
             android:exported="false" />
@@ -44,7 +45,13 @@
             android:exported="false" />
         <activity
             android:name=".Activity.User.SignUpActivity"
-            android:exported="false" />
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".Activity.Booking.MovieCheckoutActivity"
             android:exported="false" />
