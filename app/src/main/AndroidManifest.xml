@@ -22,8 +22,8 @@
         android:theme="@style/Theme.TicketOnlineApp.NoActionBar"
         tools:targetApi="31">
         <activity
-            android:name=".Activity.Ticket.MyTicketActivity"
-            android:exported="true">
+            android:name=".Activity.User.SplashActivity"
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -31,7 +31,15 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".Activity.Ticket.MyTicketActivity"
+            android:exported="true">
+
+        </activity>
+        <activity
             android:name=".Activity.User.SignInActivity"
+            android:exported="false" />
+<activity
+            android:name=".Activity.User.EditAccountActivity "
             android:exported="false" />
         <activity
             android:name=".Activity.HomeActivity"
@@ -58,7 +66,16 @@
             android:name=".Activity.Booking.SuccessCheckoutActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.User.SplashActivity"
+            android:name=".Activity.Ticket.TicketDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.Wallet.MyWalletActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.Wallet.SuccessTopUpActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.Wallet.TopUpActivity"
             android:exported="false" />
     </application>
 
