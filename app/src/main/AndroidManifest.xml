@@ -65,6 +65,15 @@
         <activity
             android:name=".Activity.User.SplashActivity"
             android:exported="false" />
+        <activity
+            android:name=".Activity.Wallet.MyWalletActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.Wallet.SuccessTopUpActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.Wallet.TopUpActivity"
+            android:exported="false" />
     </application>
 
 </manifest>
