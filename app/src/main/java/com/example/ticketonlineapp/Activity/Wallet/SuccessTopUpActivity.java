@@ -71,8 +71,8 @@ public class SuccessTopUpActivity extends AppCompatActivity {
                 }
             }
         });
-        //int wallet = FirebaseRequest.database.collection("Users").document(FirebaseRequest.mAuth.getUid()).get("wallet"). + Integer.parseInt(intent.getStringExtra("selectedPrice"));
-        //   FirebaseRequest.database.collection("Users").document(FirebaseRequest.mAuth.getUid()).update("wallet", wallet);
+        //int wallet = FirebaseRequests.database.collection("Users").document(FirebaseRequests.mAuth.getUid()).get("wallet") + Integer.parseInt(intent.getStringExtra("selectedPrice"));
+        //FirebaseRequests.database.collection("Users").document(FirebaseRequests.mAuth.getUid()).update("wallet", wallet);
         // InforBooked.getInstance().total+= Integer.parseInt(intent.getStringExtra("selectedPrice"));
         backWalletBtn.setOnClickListener(new View.OnClickListener() {
             @Override
