@@ -51,6 +51,7 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class MyWalletActivity extends AppCompatActivity {
 
@@ -77,27 +78,27 @@ public class MyWalletActivity extends AppCompatActivity {
         listMovie = new ArrayList<Ticket>();
         totalTv = (TextView) findViewById(R.id.total);
         nameUser = findViewById(R.id.nameUser);
-//        DocumentReference docRef = FirebaseRequests.database.collection("Users").document(FirebaseRequests.mAuth.getUid());
-//        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-//            @Override
-//            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-//                if (task.isSuccessful()) {
-//                    DocumentSnapshot document = task.getResult();
-//                    if (document.exists()) {
-////                        InforBooked.getInstance().total += Integer.parseInt(String.valueOf(document.get("wallet")));
-//                        NumberFormat formatter = new DecimalFormat("#,###");
-//                        totalTv.setText(formatter.format(document.get("Wallet")) + " VNĐ");
-//                        nameUser.setText(String.valueOf(document.get("Name")))
-//                        ;
-//
-//                    } else {
-//                        Log.e("c", "No such document");
-//                    }
-//                } else {
-//                    Log.e("dđ", "get failed with ", task.getException());
-//                }
-//            }
-//        });
+        DocumentReference docRef = FirebaseRequests.database.collection("Users").document(Objects.requireNonNull(FirebaseRequests.mAuth.getUid()));
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+//                        InforBooked.getInstance().total += Integer.parseInt(String.valueOf(document.get("wallet")));
+                        NumberFormat formatter = new DecimalFormat("#,###");
+                        totalTv.setText(formatter.format(document.get("Wallet")) + " VNĐ");
+                        nameUser.setText(String.valueOf(document.get("Name")))
+                        ;
+
+                    } else {
+                        Log.e("c", "No such document");
+                    }
+                } else {
+                    Log.e("dđ", "get failed with ", task.getException());
+                }
+            }
+        });
         setListBookedMovie();
         topUpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
