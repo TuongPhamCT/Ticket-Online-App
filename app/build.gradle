@@ -5,12 +5,12 @@ plugins {
 
 android {
     namespace 'com.example.ticketonlineapp'
-    compileSdk 34
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.example.ticketonlineapp"
         minSdk 26
-        targetSdk 34
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 
@@ -72,5 +72,5 @@ dependencies {
     implementation 'com.google.android.gms:play-services-maps:18.2.0'
     implementation 'com.google.android.gms:play-services-location:21.2.0'
     implementation 'com.karumi:dexter:6.2.1'
-    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+    implementation 'com.github.PhilJay:MPAndroidChart:3.1.0'
 }
