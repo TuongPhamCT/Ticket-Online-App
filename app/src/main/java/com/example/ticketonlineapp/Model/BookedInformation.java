@@ -1,0 +1,55 @@
+package com.example.ticketonlineapp.Model;
+
+import com.example.ticketonlineapp.Database.FirebaseRequests;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.Timestamp;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+
+public class BookedInformation {
+    private static BookedInformation instance;
+    public Cinema cinema;
+    public String dateBooked;
+    public Film film;
+    public int height = 0;
+    public List<Cinema> listCinema = new ArrayList<Cinema>();
+    public boolean isDateSelected;
+    public boolean isCitySelected;
+    public boolean isTimeSelected;
+    public String timeBooked;
+    public int prevPosition = -1;
+    public String typeFilm = "All";
+    public int total = 0;
+    public static BookedInformation getInstance(){
+        if(instance == null){
+            instance = new BookedInformation();
+        }
+        return  instance;
+    }
+
+    public void removeExpireFilm(){
+        CollectionReference showtimeCollection= FirebaseRequests.database.collection("Showtime");
+        FirebaseRequests.database.collection("Showtime").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                List<DocumentSnapshot> listDocs = queryDocumentSnapshots.getDocuments();
+                Calendar calendar = Calendar.getInstance();
+                for(DocumentSnapshot doc : listDocs){
+                    Timestamp timestamp = doc.getTimestamp("TimeBooked");
+                    if(calendar.getTime().after(timestamp.toDate())){
+
+                        doc.getReference().delete();
+
+                    }
+
+                }
+
+            }
+        });
+    }
+}
