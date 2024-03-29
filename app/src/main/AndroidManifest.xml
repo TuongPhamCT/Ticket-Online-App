@@ -22,13 +22,13 @@
         android:theme="@style/Theme.TicketOnlineApp.NoActionBar"
         tools:targetApi="31">
         <activity
-            android:name=".EditMovieActivity"
+            android:name=".Activity.Movie.EditMovieActivity"
             android:exported="false" />
         <activity
-            android:name=".ShowTimeScheduleActivity"
+            android:name=".Activity.Booking.ShowTimeScheduleActivity"
             android:exported="false" />
         <activity
-            android:name=".BookedActivity"
+            android:name=".Activity.Booking.BookedActivity"
             android:exported="false" />
         <activity
             android:name=".Activity.Discount.AddDiscountActivity"
