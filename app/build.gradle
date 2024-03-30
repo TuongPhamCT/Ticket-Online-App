@@ -5,12 +5,12 @@ plugins {
 
 android {
     namespace 'com.example.ticketonlineapp'
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.example.ticketonlineapp"
         minSdk 26
-        targetSdk 33
+        targetSdk 34
         versionCode 1
         versionName "1.0"
 
@@ -29,6 +29,9 @@ android {
     }
     buildFeatures {
         viewBinding true
+    }
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
     }
 }
 
