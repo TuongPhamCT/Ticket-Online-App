@@ -1,4 +1,4 @@
-package com.example.ticketonlineapp.Activity.User;
+package com.example.ticketonlineapp.Activity.Movie;
 
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -16,6 +16,12 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.example.ticketonlineapp.Activity.Network.CheckNetwork;
+import com.example.ticketonlineapp.Adapter.FilmDetailPagerAdapter;
+import com.example.ticketonlineapp.Model.BookedInformation;
+import com.example.ticketonlineapp.Model.ExtraIntent;
+import com.example.ticketonlineapp.Model.Film;
+import com.example.ticketonlineapp.Model.Users;
 import com.example.ticketonlineapp.R;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.firestore.DocumentReference;
@@ -23,23 +29,24 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.squareup.picasso.Picasso;
 
 import java.text.DecimalFormat;
 
 
 public class InformationFilmActivity extends FragmentActivity {
     int height = 0;
-    //NetworkChangeListener networkChangeListener = new NetworkChangeListener();
+    CheckNetwork checkNetwork = new CheckNetwork();
     @Override
     protected void onStart() {
         IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
-        //registerReceiver(networkChangeListener, filter);
+        registerReceiver(checkNetwork, filter);
         super.onStart();
     }
 
     @Override
     protected void onStop() {
-        //unregisterReceiver(networkChangeListener);
+        unregisterReceiver(checkNetwork);
         super.onStop();
     }
 
@@ -53,17 +60,17 @@ public class InformationFilmActivity extends FragmentActivity {
     TextView durationTime;
     TabLayout tabLayout;
     ViewPager2 pager;
-    //FilmModel f;
+    Film f;
     ImageView EditMovie;
     LinearLayoutCompat topView;
 
-    //FilmDetailPagerAdapter filmDetailPagerAdapter;
+    FilmDetailPagerAdapter filmDetailPagerAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.information_film_screen);
         Intent intent = getIntent();
-        //f = intent.getParcelableExtra(ExtraIntent.film);
+        f = intent.getParcelableExtra(ExtraIntent.film);
         topView = findViewById(R.id.topView);
         mainLayout = findViewById(R.id.mainLayout);
         backgroundImage = findViewById(R.id.backgroundImage);
@@ -77,26 +84,23 @@ public class InformationFilmActivity extends FragmentActivity {
         ImageView btnBack = findViewById(R.id.btnBack);
         pager=findViewById(R.id.pager);
         tabLayout=findViewById(R.id.tab_layout);
-        //getFilm(f.getId());
+        getFilm(f.getId());
         EditMovie=findViewById(R.id.EditMovie);
-        /*if(Users.currentUser.getAccountType().equals("admin")){
+        if(Users.currentUser.getAccountType().equals("admin")){
             EditMovie.setVisibility(View.VISIBLE);
         }
-        else EditMovie.setVisibility(View.GONE);*/
+        else EditMovie.setVisibility(View.GONE);
 
-       /* EditMovie.setOnClickListener(new View.OnClickListener() {
+        EditMovie.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(InformationFilmActivity.this, EditMovieActivity.class);
                 i.putExtra(ExtraIntent.film, f);
-                EditMovieActivity.videoUris.clear();
-                EditMovieActivity.videos.clear();
                 startActivity(i);
             }
-        });*/
+        });
 
-
-        //refreshScreen();
+        refreshScreen();
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -107,17 +111,14 @@ public class InformationFilmActivity extends FragmentActivity {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 pager.setCurrentItem(tab.getPosition(),true);
-
             }
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
-
             }
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
-
             }
         });
         pager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
@@ -127,7 +128,7 @@ public class InformationFilmActivity extends FragmentActivity {
             }
         });
     }
-    /*void getFilm(String id)
+    void getFilm(String id)
     {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         final DocumentReference docRef = db.collection("Movies").document(id);
@@ -139,11 +140,10 @@ public class InformationFilmActivity extends FragmentActivity {
                 return;
             }
                 if (snapshot != null && snapshot.exists()) {
-                    f = snapshot.toObject(FilmModel.class);
+                    f = snapshot.toObject(Film.class);
                     nameTV.setText(f.getName());
 
                     Picasso.get().load(f.getBackGroundImage()).fit().centerCrop().into(backgroundImage);
-
                     Picasso.get().load(f.getPosterImage()).fit().centerCrop().into(PosterImage);
 
                     ratingBar.setRating(f.getVote());
@@ -155,8 +155,8 @@ public class InformationFilmActivity extends FragmentActivity {
                 }
             }
         });
-    }*/
-    /*void refreshScreen()
+    }
+    void refreshScreen()
     {
         nameTV.setText(f.getName());
 
@@ -164,7 +164,6 @@ public class InformationFilmActivity extends FragmentActivity {
 
         Picasso.get().load(f.getPosterImage()).fit().centerCrop().into(PosterImage);
 
-        //InforBooked.getInstance().binhHeight = tabLayout.getMeasuredHeight();
         ratingBar.setRating(f.getVote());
         DecimalFormat df = new DecimalFormat("0.0");
         voteTV.setText("(" + df.format(f.getVote()) +")");
@@ -177,9 +176,8 @@ public class InformationFilmActivity extends FragmentActivity {
         tabLayout.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
-                InforBooked.getInstance().height = mainLayout.getMeasuredHeight() - topView.getMeasuredHeight() - tabLayout.getMeasuredHeight();
+                BookedInformation.getInstance().height = mainLayout.getMeasuredHeight() - topView.getMeasuredHeight() - tabLayout.getMeasuredHeight();
             }
         });
-
-    }*/
+    }
 }
