@@ -60,5 +60,6 @@
     <string name="change_your_email_address">Change your email address</string>
     <string name="email_address">Email Address</string>
     <string name="update_my_account">Update My Account</string>
+    <string name="student">Student</string>
     <!--    -->
 </resources>
