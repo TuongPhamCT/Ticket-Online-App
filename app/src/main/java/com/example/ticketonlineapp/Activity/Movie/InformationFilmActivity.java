@@ -11,9 +11,9 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.ticketonlineapp.Activity.Network.CheckNetwork;
@@ -34,8 +34,7 @@ import com.squareup.picasso.Picasso;
 import java.text.DecimalFormat;
 
 
-public class InformationFilmActivity extends FragmentActivity {
-    int height = 0;
+public class InformationFilmActivity extends AppCompatActivity {
     CheckNetwork checkNetwork = new CheckNetwork();
     @Override
     protected void onStart() {
