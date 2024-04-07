@@ -123,6 +123,10 @@
         <activity
             android:name=".Activity.Movie.InformationFilmActivity"
             android:exported="false" />
+        <activity
+            android:name=".Activity.Booking.ChooseRoomActivity"
+            android:exported="false" />
+
     </application>
 
 </manifest>
