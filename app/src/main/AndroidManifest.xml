@@ -21,8 +21,53 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TicketOnlineApp.NoActionBar"
         tools:targetApi="31">
+
         <activity
-            android:name=".Activity.Booking.ChooseRoomActivity"
+            android:name=".Activity.Notification.EditNotificationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.Notification.NotificationDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.Movie.EditMovieActivity"
+            android:exported="false" />
+
+        <service
+            android:name=".Activity.Notification.FirebaseMessagingService"
+            android:exported="true"
+            android:permission="TODO"
+            tools:ignore="ExportedService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <activity
+            android:name=".Activity.Booking.ShowTimeScheduleActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.Booking.BookedActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.Discount.AddDiscountActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.Discount.ViewAllDiscountActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.Movie.ViewAllMovieActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.Notification.NotificationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.Report.ReportActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.Movie.AddMovieActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.User.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,7 +76,13 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".Activity.Ticket.MyTicketActivity"
+            android:exported="true" />
+        <activity
             android:name=".Activity.User.SignInActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.User.EditAccountActivity"
             android:exported="false" />
         <activity
             android:name=".Activity.HomeActivity"
@@ -58,8 +109,24 @@
             android:name=".Activity.Booking.SuccessCheckoutActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.User.SplashActivity"
+            android:name=".Activity.Ticket.TicketDetailActivity"
             android:exported="false" />
+        <activity
+            android:name=".Activity.Wallet.MyWalletActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.Wallet.SuccessTopUpActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.Wallet.TopUpActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.Movie.InformationFilmActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.Booking.ChooseRoomActivity"
+            android:exported="false" />
+
     </application>
 
 </manifest>

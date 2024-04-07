@@ -51,4 +51,15 @@
     <string name="checkout">Checkout</string>
 
     <!--    -->
+
+    <!--    -->
+    <!--    String used for activity_edit_account-->
+    <string name="edit_your_account">Edit Your Account</string>
+    <string name="change_your_name">Change your name</string>
+    <string name="full_name">Full Name</string>
+    <string name="change_your_email_address">Change your email address</string>
+    <string name="email_address">Email Address</string>
+    <string name="update_my_account">Update My Account</string>
+    <string name="student">Student</string>
+    <!--    -->
 </resources>
