@@ -13,12 +13,22 @@ import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.ticketonlineapp.Database.FirebaseRequests;
+import com.example.ticketonlineapp.Model.Discount;
+import com.example.ticketonlineapp.Model.Film;
+import com.example.ticketonlineapp.Model.Service;
+import com.example.ticketonlineapp.Model.ServiceInTicket;
 import com.example.ticketonlineapp.Model.Ticket;
 import com.example.ticketonlineapp.R;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.WriterException;
+import com.google.zxing.common.BitMatrix;
+import com.journeyapps.barcodescanner.BarcodeEncoder;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.squareup.picasso.Picasso;
 
@@ -64,30 +74,38 @@ public class TicketDetailActivity extends AppCompatActivity {
         inforTicketLayout = findViewById(R.id.inforTicket);
         Button backButton = (Button) findViewById(R.id.backbutton);
         qrCode = findViewById(R.id.QRCode);
-        //Ticket ticket = getIntent().getParcelableExtra("ticket");
-        /*FirebaseRequest.database.collection("Movies").document(ticket.getFilmID()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+        Ticket ticket = getIntent().getParcelableExtra("ticket");
+        if(ticket == null) {
+            ticket = new Ticket(Timestamp.now() , "1" , "1" , "1" , "1" , "1" , "1" , "1" , "1");
+        }
+        FirebaseRequests.database.collection("Movies").document(ticket.getFilmID()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
-                FilmModel film = documentSnapshot.toObject(FilmModel.class);
-                Picasso.get().load(film.getPosterImage()).into(filmPoster);
-                filmName.setText(film.getName());
-                filmRating.setRating(film.getVote());
-                DecimalFormat df = new DecimalFormat("0.0");
-                filmRatingText.setText("(" + df.format(film.getVote())  + ")");
-                filmKind.setText(film.getGenre());
-                filmDuration.setText(film.getDurationTime());
+                Film film = documentSnapshot.toObject(Film.class);
+                if(film != null) {
+                    Picasso.get().load(film.getPosterImage()).into(filmPoster);
+                    filmName.setText(film.getName());
+                    filmRating.setRating(film.getVote());
+                    DecimalFormat df = new DecimalFormat("0.0");
+                    filmRatingText.setText("(" + df.format(film.getVote())  + ")");
+                    filmKind.setText(film.getGenre());
+                    filmDuration.setText(film.getDurationTime());
+                }
             }
-        });*/
+        });
 
-        //String cinemaID = ticket.getCinemaID();
+        String cinemaID = ticket.getCinemaID();
 
-        /*FirebaseRequest.database.collection("Cinema").document(cinemaID).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+        FirebaseRequests.database.collection("Cinema").document(cinemaID).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
-                cinema.setText(documentSnapshot.get("Name").toString());
+                if(documentSnapshot.get("Name") != null) {
+                    cinema.setText(documentSnapshot.get("Name").toString());
+                }
+
             }
-        });*/
-        /*Timestamp time = ticket.getTime();
+        });
+        Timestamp time = ticket.getTime();
         DateFormat dateFormat = new SimpleDateFormat("hh:mm, E MMM dd", Locale.ENGLISH);
         String timeBooked = dateFormat.format(time.toDate());
         bookDay.setText(timeBooked);
@@ -99,11 +117,14 @@ public class TicketDetailActivity extends AppCompatActivity {
             voucherLayout.setVisibility(View.GONE);
         }
         else {
-            FirebaseRequest.database.collection("Discounts").document(voucherID).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            FirebaseRequests.database.collection("Discounts").document(voucherID).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                 @Override
                 public void onSuccess(DocumentSnapshot documentSnapshot) {
                     Discount discount = documentSnapshot.toObject(Discount.class);
-                    voucher.setText(discount.getName() + " " + discount.getDiscountRate() + "%");
+                    if(discount != null) {
+                        voucher.setText(discount.getName() + " " + discount.getDiscountRate() + "%");
+                    }
+
                 }
             });
         }
@@ -114,12 +135,12 @@ public class TicketDetailActivity extends AppCompatActivity {
             public void onClick(View view) {
                 finish();
             }
-        });*/
+        });
     }
 
 
     void generateQrcode(String idOrder){
-        /*MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
+        MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
 
         try{
             BitMatrix bitMatrix = multiFormatWriter.encode("id order: " + idOrder, BarcodeFormat.QR_CODE, 500, 500);
@@ -130,10 +151,10 @@ public class TicketDetailActivity extends AppCompatActivity {
         }
         catch(WriterException e){
             throw new RuntimeException(e);
-        }*/
+        }
     }
     void addServiceToLayout(String id){
-        /*FirebaseRequest.database.collection("Ticket").document(id).collection("ServiceInTicket").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+        FirebaseRequests.database.collection("Ticket").document(id).collection("ServiceInTicket").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
 
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
@@ -146,7 +167,7 @@ public class TicketDetailActivity extends AppCompatActivity {
                     View con = LayoutInflater.from(TicketDetailActivity.this).inflate(R.layout.service_ticket_item, null);
                     TextView name = con.findViewById(R.id.name);
                     TextView value = con.findViewById(R.id.value);
-                    FirebaseRequest.database.collection("Service").document(serviceInTicket.getServiceID()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    FirebaseRequests.database.collection("Service").document(serviceInTicket.getServiceID()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                         @Override
                         public void onSuccess(DocumentSnapshot documentSnapshot) {
                             Service service = documentSnapshot.toObject(Service.class);
@@ -159,7 +180,7 @@ public class TicketDetailActivity extends AppCompatActivity {
                 }
 
             }
-        });*/
+        });
 
     }
 
