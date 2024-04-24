@@ -7,6 +7,12 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
+import android.widget.ImageView;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.cloudinary.android.MediaManager;
 import com.example.ticketonlineapp.Activity.HomeActivity;
@@ -19,13 +25,6 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
-
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.os.Handler;
-import android.util.Log;
-import android.widget.ImageView;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -69,14 +68,9 @@ public class SplashActivity extends AppCompatActivity {
             config.put( "api_secret", "YG9kLh6H5Yo7telUqUnmW2cacPM");
             MediaManager.init(this, config);
         }
-        catch (Exception e)
-        {
-
-        }
+        catch (Exception e) {}
         new Handler().postDelayed(new Runnable() {
-
             @Override
-
             public void run() {
                 Intent i;
                 SharedPreferences sharedPref = getSharedPreferences("shared_prefs",0);
