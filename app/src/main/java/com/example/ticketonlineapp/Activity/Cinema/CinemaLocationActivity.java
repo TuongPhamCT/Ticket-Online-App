@@ -1,6 +1,7 @@
 package com.example.ticketonlineapp.Activity.Cinema;
 
 import androidx.annotation.NonNull;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.core.app.ActivityCompat;
@@ -26,17 +27,20 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
 import com.example.ticketonlineapp.Model.Cinema;
 import com.example.ticketonlineapp.Activity.Network.CheckNetwork;
 import com.example.ticketonlineapp.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
+
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.karumi.dexter.Dexter;
@@ -46,21 +50,26 @@ import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.single.PermissionListener;
 
+
 import java.io.IOException;
 import java.util.List;
 
 public class CinemaLocationActivity extends FragmentActivity implements OnMapReadyCallback {
-    CheckNetwork checkNetwork = new CheckNetwork();
+
+    CheckNetwork networkChangeListener = new CheckNetwork();
     @Override
     protected void onStart() {
         IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
-        registerReceiver(checkNetwork, filter);
+        registerReceiver(networkChangeListener, filter);
+
         super.onStart();
     }
 
     @Override
     protected void onStop() {
-        unregisterReceiver(checkNetwork);
+
+        unregisterReceiver(networkChangeListener);
+
         super.onStop();
     }
 
@@ -88,7 +97,10 @@ public class CinemaLocationActivity extends FragmentActivity implements OnMapRea
         supportMapFragment.getMapAsync(this);
 
         Intent intent = getIntent();
-        Cinema cinema = intent.getParcelableExtra("cinema");
+
+        //Cinema cinema = intent.getParcelableExtra("cinema");
+        Cinema cinema = new Cinema("1" , "1" , "1" , "1" , 1 , "1" , "1" );
+
         location = cinema.getName();
 
         nameCinema.setText(cinema.getName());

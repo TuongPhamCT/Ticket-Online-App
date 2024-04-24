@@ -8,13 +8,18 @@
 
     android:paddingHorizontal="24dp"
     tools:context=".Activity.Cinema.CinemaLocationActivity">
+
+
     <androidx.appcompat.widget.AppCompatButton
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="60dp"
         android:id="@+id/backbutton"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:background="@drawable/back_icon" />
+        android:layout_marginTop="60dp"
+        android:background="@drawable/back_icon"
+        app:layout_constraintBottom_toBottomOf="@+id/nameCinema"
+        app:layout_constraintStart_toStartOf="@+id/nameCinema"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
 
         android:layout_marginTop="60dp"
@@ -34,13 +39,17 @@
         android:layout_height="200dp"
         android:id="@+id/map_fragment"
         android:name="com.google.android.gms.maps.SupportMapFragment"/>
+
+
     <TextView
-        android:layout_marginTop="24dp"
-        android:fontFamily="@font/montserrat400"
-        app:layout_constraintTop_toBottomOf="@+id/map_fragment"
+        android:id="@+id/address"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/address"/>
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/montserrat400"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/map_fragment" />
+
     <LinearLayout
         android:id="@+id/navigateMap"
         android:layout_width="wrap_content"
