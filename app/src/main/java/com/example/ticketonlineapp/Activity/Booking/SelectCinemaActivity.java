@@ -23,6 +23,15 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.ticketonlineapp.Activity.Network.CheckNetwork;
+import com.example.ticketonlineapp.Adapter.CinemaNameAdapter;
+import com.example.ticketonlineapp.Adapter.TimeBookedAdapter;
+import com.example.ticketonlineapp.Database.FirebaseRequests;
+import com.example.ticketonlineapp.Model.BookedInformation;
+import com.example.ticketonlineapp.Model.Cinema;
+import com.example.ticketonlineapp.Model.City;
+import com.example.ticketonlineapp.Model.Film;
+import com.example.ticketonlineapp.Model.ShowTime;
 import com.example.ticketonlineapp.R;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.Timestamp;
@@ -37,7 +46,7 @@ import java.util.List;
 
 public class SelectCinemaActivity extends AppCompatActivity {
 
-    //NetworkChangeListener networkChangeListener = new NetworkChangeListener();
+    CheckNetwork networkChangeListener = new CheckNetwork();
     private List<String> listCity;
     private AutoCompleteTextView countryAutoTv;
     private RecyclerView dayRecycleView;
@@ -45,20 +54,20 @@ public class SelectCinemaActivity extends AppCompatActivity {
     private ListView cinemaLv;
     private ImageButton nextBtn;
     private TextView nameFilmTv;
-    //private FilmModel selectedFilm;
+    private Film selectedFilm;
     private Button backBtn;
     protected static String binhdd;
     private String monthName;
     @Override
     protected void onStart() {
         IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
-        //registerReceiver(networkChangeListener, filter);
+        registerReceiver(networkChangeListener, filter);
         super.onStart();
     }
 
     @Override
     protected void onStop() {
-        //unregisterReceiver(networkChangeListener);
+        unregisterReceiver(networkChangeListener);
         super.onStop();
     }
 
@@ -67,7 +76,7 @@ public class SelectCinemaActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_cinema);
-        /*backBtn = (Button) findViewById(R.id.backbutton);
+        backBtn = (Button) findViewById(R.id.backbutton);
         firestore = FirebaseFirestore.getInstance();
         countryAutoTv = (AutoCompleteTextView) findViewById(R.id.countryAutoTv);
         listCity = new ArrayList<String>();
@@ -92,6 +101,9 @@ public class SelectCinemaActivity extends AppCompatActivity {
         //Toast.makeText(this, String.valueOf(calendar.getActualMaximum(Calendar.DAY_OF_MONTH)) , Toast.LENGTH_LONG).show();
         Intent intent = getIntent();
         selectedFilm = intent.getParcelableExtra("selectedFilm");
+        if(selectedFilm == null) {
+            selectedFilm = new Film("1","1","1","1","1", 2.5F,"1","1","1",Timestamp.now() , Timestamp.now() , new ArrayList<>());
+        }
         int countDate = calendar.get(Calendar.DAY_OF_WEEK);
         int countTime = calendar.get(Calendar.DATE);
         int dayOfMonth = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
@@ -107,8 +119,8 @@ public class SelectCinemaActivity extends AppCompatActivity {
             countTime++;
         }
         cinemaLv = (ListView) findViewById(R.id.cinemaLv);
-        TimeBookedAdapter timeBookedAdapter = new TimeBookedAdapter(listDate, listTime,null, null, null, cinemaLv, BookedActivity.this);
-        dayRecycleView.setAdapter(new TimeBookedAdapter(listDate, listTime, null,null, null, cinemaLv, BookedActivity.this));
+        TimeBookedAdapter timeBookedAdapter = new TimeBookedAdapter(listDate, listTime,null, null, null, cinemaLv, SelectCinemaActivity.this);
+        dayRecycleView.setAdapter(new TimeBookedAdapter(listDate, listTime, null,null, null, cinemaLv, SelectCinemaActivity.this));
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         dayRecycleView.setLayoutManager(layoutManager);
 
@@ -122,15 +134,15 @@ public class SelectCinemaActivity extends AppCompatActivity {
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!InforBooked.getInstance().isTimeSelected|| !InforBooked.getInstance().isDateSelected || !InforBooked.getInstance().isCitySelected ){
-                    Toast.makeText(BookedActivity.this, "Please choose time and date!", Toast.LENGTH_SHORT).show();
+                if(!BookedInformation.getInstance().isTimeSelected|| !BookedInformation.getInstance().isDateSelected || !BookedInformation.getInstance().isCitySelected ){
+                    Toast.makeText(SelectCinemaActivity.this, "Please choose time and date!", Toast.LENGTH_SHORT).show();
                 }
                 else{
-                    Intent intent = new Intent(BookedActivity.this, BookSeatActivity.class);
+                    Intent intent = new Intent(SelectCinemaActivity.this, ChooseSeatActivity.class);
                     intent.putExtra("selectedFilm", selectedFilm);
-                    intent.putExtra("cinema", (Parcelable) InforBooked.getInstance().cinema);
-                    intent.putExtra("dateBooked", InforBooked.getInstance().dateBooked);
-                    intent.putExtra("timeBooked", InforBooked.getInstance().timeBooked);
+                    intent.putExtra("cinema", (Parcelable) BookedInformation.getInstance().cinema);
+                    intent.putExtra("dateBooked", BookedInformation.getInstance().dateBooked);
+                    intent.putExtra("timeBooked", BookedInformation.getInstance().timeBooked);
                     startActivity(intent);
                 }
 
@@ -139,17 +151,17 @@ public class SelectCinemaActivity extends AppCompatActivity {
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                InforBooked.getInstance().isDateSelected = false;
-                InforBooked.getInstance().isTimeSelected = false;
-                InforBooked.getInstance().isCitySelected = false;
-                InforBooked.getInstance().timeBooked = "";
-                InforBooked.getInstance().prevPosition = -1;
+                BookedInformation.getInstance().isDateSelected = false;
+                BookedInformation.getInstance().isTimeSelected = false;
+                BookedInformation.getInstance().isCitySelected = false;
+                BookedInformation.getInstance().timeBooked = "";
+                BookedInformation.getInstance().prevPosition = -1;
                 finish();
             }
-        });*/
+        });
     }
 
-    /*void loadListCity(){
+    void loadListCity(){
         firestore.collection("City").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                                                                     @Override
                                                                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
@@ -161,17 +173,17 @@ public class SelectCinemaActivity extends AppCompatActivity {
                                                                                 listCity.add(String.valueOf(doc.get("Name")));
 
                                                                             }
-                                                                            countryAutoTv.setAdapter(new ArrayAdapter<String>(BookedActivity.this, R.layout.country_item, listCity));
+                                                                            countryAutoTv.setAdapter(new ArrayAdapter<String>(SelectCinemaActivity.this, R.layout.country_item, listCity));
                                                                             countryAutoTv.setDropDownBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.dark_background_1)));
 
                                                                             countryAutoTv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                                                                 @Override
                                                                                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                                                                                    InforBooked.getInstance().isCitySelected = true;
+                                                                                    BookedInformation.getInstance().isCitySelected = true;
 
                                                                                     List<Cinema> listCinema = new ArrayList<Cinema>();
-                                                                                    FirebaseRequest.database.collection("Cinema").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                                                                                    FirebaseRequests.database.collection("Cinema").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                                                                                         @Override
                                                                                         public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                                                                                             List<DocumentSnapshot> listDocs = queryDocumentSnapshots.getDocuments();
@@ -182,8 +194,8 @@ public class SelectCinemaActivity extends AppCompatActivity {
 
                                                                                                 }
                                                                                             }
-                                                                                            CinameNameAdapter cinameNameAdapter = new CinameNameAdapter(BookedActivity.this, R.layout.cinema_booked_item,listCinema, selectedFilm);
-                                                                                            cinemaLv.setAdapter(cinameNameAdapter);
+                                                                                            CinemaNameAdapter CinemaNameAdapter = new CinemaNameAdapter(SelectCinemaActivity.this, R.layout.cinema_booked_item,listCinema, selectedFilm);
+                                                                                            cinemaLv.setAdapter(CinemaNameAdapter);
 
 
                                                                                             //Helper.getListViewSize(cinemaLv, BookedActivity.this);
@@ -203,11 +215,11 @@ public class SelectCinemaActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        InforBooked.getInstance().isDateSelected = false;
-        InforBooked.getInstance().isTimeSelected = false;
-        InforBooked.getInstance().isCitySelected = false;
-        InforBooked.getInstance().timeBooked = "";
-        InforBooked.getInstance().prevPosition = -1;
+        BookedInformation.getInstance().isDateSelected = false;
+        BookedInformation.getInstance().isTimeSelected = false;
+        BookedInformation.getInstance().isCitySelected = false;
+        BookedInformation.getInstance().timeBooked = "";
+        BookedInformation.getInstance().prevPosition = -1;
 
         super.onBackPressed();
     }
@@ -216,19 +228,19 @@ public class SelectCinemaActivity extends AppCompatActivity {
         Calendar calendar = Calendar.getInstance();
         Date date = calendar.getTime();
 
-        FirebaseRequest.database.collection("Showtime").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+        FirebaseRequests.database.collection("Showtime").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                 for(DocumentSnapshot doc : queryDocumentSnapshots){
                     ShowTime showTime = doc.toObject(ShowTime.class);
                     Timestamp timeBook = showTime.getTimeBooked();
                     if(timeBook.toDate().before(date)){
-                        FirebaseRequest.database.collection("Showtime").document(doc.getId()).delete();
+                        FirebaseRequests.database.collection("Showtime").document(doc.getId()).delete();
                     }
                 }
             }
         });
 
 
-    }*/
+    }
 }

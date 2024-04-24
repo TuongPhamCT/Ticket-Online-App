@@ -5,14 +5,19 @@
 
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="wrap_content">
+
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
             android:id="@+id/cinemaCl"
+            android:layout_width="match_parent"
+
             android:layout_height="match_parent">
 
             <TextView
@@ -20,7 +25,9 @@
                 style="@style/titleStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
 
             <TextView
                 android:id="@+id/distance"
@@ -43,58 +50,65 @@
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
         <LinearLayout
-            android:layout_marginTop="8dp"
-            android:visibility="gone"
             android:id="@+id/showHideLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_marginTop="8dp"
+            android:orientation="vertical"
+            android:visibility="gone">
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <TextView
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:textSize="12dp"
                     android:id="@+id/addressCinema"
-                    android:fontFamily="@font/montserrat500"
-                    app:layout_constraintEnd_toStartOf="@+id/locationCinema"
                     android:layout_width="0dp"
-                    android:layout_marginRight="40dp"
                     android:layout_height="wrap_content"
-                    android:text="Navigate"/>
+                    android:layout_marginRight="40dp"
+                    android:fontFamily="@font/montserrat500"
+                    android:text="Navigate"
+                    android:textSize="12dp"
+                    app:layout_constraintEnd_toStartOf="@+id/locationCinema"
+                    app:layout_constraintStart_toStartOf="parent" />
+
                 <LinearLayout
-                    android:orientation="horizontal"
                     android:id="@+id/locationCinema"
-                    android:background="@drawable/button_background"
-                    app:layout_constraintEnd_toEndOf="parent"
                     android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/button_background"
+                    android:orientation="horizontal"
                     android:paddingHorizontal="8dp"
                     android:paddingVertical="4dp"
-                    android:layout_height="wrap_content">
-                    <ImageView
-                        android:src="@drawable/baseline_near_me_24"
+                    app:layout_constraintEnd_toEndOf="parent">
 
+                    <ImageView
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
+
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/baseline_near_me_24" />
+
                     <TextView
-                        android:textSize="12dp"
-                        android:fontFamily="@font/montserrat500"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Navigate"/>
+                        android:fontFamily="@font/montserrat500"
+                        android:text="Navigate"
+                        android:textSize="12dp" />
+
                 </LinearLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:layout_marginTop="12dp"
                 android:id="@+id/listTime"
-                android:scrollbars="none"
-                android:nestedScrollingEnabled="false"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layoutManager="com.google.android.flexbox.FlexboxLayoutManager"
-                />
+                android:layout_marginTop="12dp"
+                android:nestedScrollingEnabled="false"
+                android:scrollbars="none"
+                app:layoutManager="com.google.android.flexbox.FlexboxLayoutManager" />
+
         </LinearLayout>
 
 

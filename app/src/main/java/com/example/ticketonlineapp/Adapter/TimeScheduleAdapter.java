@@ -20,13 +20,12 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.ticketonlineapp.Activity.Booking.BookedActivity;
 import com.example.ticketonlineapp.Database.FirebaseRequests;
+import com.example.ticketonlineapp.Model.BookedInformation;
 import com.example.ticketonlineapp.Model.Cinema;
-import com.example.ticketonlineapp.Model.City;
 import com.example.ticketonlineapp.Model.Film;
-import com.example.ticketonlineapp.Model.InforBooked;
-import com.example.ticketonlineapp.Model.ScheduleFilm;
+import com.example.ticketonlineapp.Model.ScheduledFilm;
+
 import com.example.ticketonlineapp.Model.ShowTime;
 import com.example.ticketonlineapp.R;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -89,22 +88,12 @@ public class TimeScheduleAdapter extends RecyclerView.Adapter<TimeScheduleAdapte
                     if (timeView != null) {
 
                         if (listTime == null) {
-//                            if (prevType != cinemaName) {
-//                                if (prevView != null) {
-//                                    TextView tv = (TextView) prevView.findViewById(R.id.cinemaName);
-//                                    RecyclerView rv = (RecyclerView) prevView.findViewById(R.id.listTime);
-//                                    View v = rv.getLayoutManager().findViewByPosition(prevPosition);
-//                                    Button btn = v.findViewById(R.id.dateBtn);
-//                                    btn.setBackgroundColor(Color.TRANSPARENT);
-//                                    btn.setBackground(ContextCompat.getDrawable(dateBtn.getContext(), R.drawable.bg_tabview_button));
-//                                }
-//
-//
-//
-//                            }
+
+//                           
                             int count = 0;
                             int selectedIndex = -1;
-                            List<ShowTime> listShowTime = ScheduleFilm.getInstance().listShowTime;
+                            List<ShowTime> listShowTime = ScheduledFilm.getInstance().listShowTime;
+
 
                             //  Timestamp timeSchedule = new Timestamp();
                             for (int i = 0; i < listShowTime.size(); i++) {
@@ -114,7 +103,8 @@ public class TimeScheduleAdapter extends RecyclerView.Adapter<TimeScheduleAdapte
 
                                 if(cinema.getCinemaID().equals(showTime.getCinemaID())
                                         && film.getId().equals(showTime.getFilmID())
-                                        && dateFormat.format(showTime.getTimeBooked().toDate()).equals(ScheduleFilm.getInstance().dateBooked)
+                                        && dateFormat.format(showTime.getTimeBooked().toDate()).equals(ScheduledFilm.getInstance().dateBooked)
+
                                         && timeFormat.format(showTime.getTimeBooked().toDate()).equals(dateBtn.getText().toString())){
                                     selectedIndex = i;
                                 }
@@ -127,7 +117,8 @@ public class TimeScheduleAdapter extends RecyclerView.Adapter<TimeScheduleAdapte
                                 int date = calendar.get(Calendar.DATE);
                                 int month = calendar.get(Calendar.MONTH);
                                 int year = calendar.get(Calendar.YEAR);
-                                String[] dateBook = ScheduleFilm.getInstance().dateBooked.split("\n");
+                                String[] dateBook = ScheduledFilm.getInstance().dateBooked.split("\n");
+
                                 String[] timeBook = dateBtn.getText().toString().split(":");
                                 int dateSelect = Integer.parseInt(dateBook[1]);
                                 calendar.set(Calendar.DATE, dateSelect);
@@ -141,14 +132,16 @@ public class TimeScheduleAdapter extends RecyclerView.Adapter<TimeScheduleAdapte
                                     calendar.set(Calendar.MONTH, month);
                                 } else calendar.set(Calendar.MONTH, month + 1);
                                 Timestamp timeSchedule = new Timestamp(calendar.getTime());
-                                ScheduleFilm.getInstance().listShowTime.add(new ShowTime(cinema.getCinemaID(), film.getId(),bookedSeat, timeSchedule ));
+                                ScheduledFilm.getInstance().listShowTime.add(new ShowTime(cinema.getCinemaID(), film.getId(),bookedSeat, timeSchedule ));
+
                                 dateBtn.setBackgroundColor(Color.TRANSPARENT);
 
                                 dateBtn.setBackground(ContextCompat.getDrawable(dateBtn.getContext(), R.drawable.background_button));
 
 
                             } else {
-                                ScheduleFilm.getInstance().listShowTime.remove(selectedIndex);
+                                ScheduledFilm.getInstance().listShowTime.remove(selectedIndex);
+
                                 dateBtn.setBackgroundColor(Color.TRANSPARENT);
 
                                 dateBtn.setBackground(ContextCompat.getDrawable(dateBtn.getContext(), R.drawable.bg_tabview_button));
@@ -172,8 +165,9 @@ public class TimeScheduleAdapter extends RecyclerView.Adapter<TimeScheduleAdapte
                                 List<DocumentSnapshot> listDocs = queryDocumentSnapshots.getDocuments();
 
                                 if (!dateBooked.equals(null)) {
-                                    CinemaNameAdapter cinameNameAdapter = new CinemaNameAdapter(activity, R.layout.cinema_booked_item, InforBooked.getInstance().listCinema, InforBooked.getInstance().film);
-                                    timelistView.setAdapter(cinameNameAdapter);
+                                    CinemaNameAdapter CinemaNameAdapter = new CinemaNameAdapter(activity, R.layout.cinema_booked_item, BookedInformation.getInstance().listCinema, BookedInformation.getInstance().film);
+                                    timelistView.setAdapter(CinemaNameAdapter);
+
 
 
                                 }
@@ -210,7 +204,9 @@ public class TimeScheduleAdapter extends RecyclerView.Adapter<TimeScheduleAdapte
         DateFormat timeFormat = new SimpleDateFormat("HH:mm", Locale.ENGLISH);
         if (listTime != null) {
             holder.dateBtn.setText(listDate.get(position) + "\n" + listTime.get(position));
-//            for(ShowTime showTime : ScheduleFilm.getInstance().listShowTime){
+
+//            for(ShowTime showTime : ScheduledFilm.getInstance().listShowTime){
+
 //                if(timeFormat.format(showTime.getTimeBooked().toDate()).equals(holder.dateBtn.getText().toString())){
 //                    holder.dateBtn.setBackgroundColor(Color.TRANSPARENT);
 //                    holder.dateBtn.setBackground(ContextCompat.getDrawable(holder.dateBtn.getContext(), R.drawable.bg_tabview_button));
@@ -222,12 +218,14 @@ public class TimeScheduleAdapter extends RecyclerView.Adapter<TimeScheduleAdapte
 
             Log.e("fd", listShowTimeSelected.size() + "");
             for(ShowTime show : listShowTimeSelected) {
-                // Log.e("fd", timeFormat.format(show.getTimeBooked().toDate()) + " " +holder.dateBtn.getText().toString() +" " + dateFormat.format(show.getTimeBooked().toDate()) +ScheduleFilm.getInstance().dateBooked +  cinema.getCinemaID() + " " + show.getCinemaID() + film.getId() + " " + show.getFilmID());
+                // Log.e("fd", timeFormat.format(show.getTimeBooked().toDate()) + " " +holder.dateBtn.getText().toString() +" " + dateFormat.format(show.getTimeBooked().toDate()) +ScheduledFilm.getInstance().dateBooked +  cinema.getCinemaID() + " " + show.getCinemaID() + film.getId() + " " + show.getFilmID());
+
                 //Log.e("dff", dateFormat.format(show.getTimeBooked().toDate()));
                 if (timeFormat.format(show.getTimeBooked().toDate()).equals(holder.dateBtn.getText().toString())
                         && cinema.getCinemaID().equals(show.getCinemaID())
                         && film.getId().equals(show.getFilmID())
-                        && dateFormat.format(show.getTimeBooked().toDate()).equals(ScheduleFilm.getInstance().dateBooked)) {
+                        && dateFormat.format(show.getTimeBooked().toDate()).equals(ScheduledFilm.getInstance().dateBooked)) {
+
                     listSelect.add(show);
                     holder.dateBtn.setEnabled(false);
                     holder.dateBtn.setBackgroundColor(Color.TRANSPARENT);
@@ -235,12 +233,13 @@ public class TimeScheduleAdapter extends RecyclerView.Adapter<TimeScheduleAdapte
                     break;
                 } else holder.Binding();
             }
-            if( ScheduleFilm.getInstance().listShowTime.size() > 0){
-                for(ShowTime showTime : ScheduleFilm.getInstance().listShowTime){
-                    // Log.e("binh",timeFormat.format(showTime.getTimeBooked().toDate())+ " " +  holder.dateBtn.getText().toString() + " "+ cinemaName+ " " + showTime.getNameCinema() + " " + dateFormat.format(showTime.getTimeBooked().toDate()) + " " + ScheduleFilm.getInstance().dateBooked);
+            if( ScheduledFilm.getInstance().listShowTime.size() > 0){
+                for(ShowTime showTime : ScheduledFilm.getInstance().listShowTime){
+                    // Log.e("binh",timeFormat.format(showTime.getTimeBooked().toDate())+ " " +  holder.dateBtn.getText().toString() + " "+ cinemaName+ " " + showTime.getNameCinema() + " " + dateFormat.format(showTime.getTimeBooked().toDate()) + " " + ScheduledFilm.getInstance().dateBooked);
                     if(timeFormat.format(showTime.getTimeBooked().toDate()).equals(holder.dateBtn.getText().toString())
                             && cinema.getCinemaID().equals(showTime.getCinemaID())
-                            && dateFormat.format(showTime.getTimeBooked().toDate()).equals(ScheduleFilm.getInstance().dateBooked)){
+                            && dateFormat.format(showTime.getTimeBooked().toDate()).equals(ScheduledFilm.getInstance().dateBooked)){
+
                         holder.dateBtn.setBackgroundColor(Color.TRANSPARENT);
                         holder.dateBtn.setBackground(ContextCompat.getDrawable(holder.dateBtn.getContext(), R.drawable.background_button));
 
@@ -251,29 +250,10 @@ public class TimeScheduleAdapter extends RecyclerView.Adapter<TimeScheduleAdapte
                             holder.Binding();
                         }
                     }
-//                    else {
-
-//                            else {
-//
-//                                holder.Binding();
-//                            }
-//
-//                        }
-//
-//                    }
 
                 }
             }
-            //Log.e("fdf", String.valueOf(listSelect.size()) + " " + String.valueOf(listShowTimeSelected.size()));
-//            FirebaseRequest.database.collection("showtime").addSnapshotListener(new EventListener<QuerySnapshot>() {
-//                @Override
-//                public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-//                    List<DocumentSnapshot> listDocs = value.getDocuments();
-//                    for(DocumentSnapshot doc : listDocs){
-//                        ShowTime showTime = doc.toObject(ShowTime.class);
 
-//                }
-//            });
 
 
 

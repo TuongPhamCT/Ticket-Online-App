@@ -24,11 +24,7 @@
         <activity
             android:name=".Activity.Cinema.CinemaLocationActivity"
             android:exported="true" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".Activity.User.SplashActivity"
@@ -111,7 +107,13 @@
             android:exported="false" />
         <activity
             android:name=".Activity.Booking.SelectCinemaActivity"
-            android:exported="false" />
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".Activity.Booking.SuccessCheckoutActivity"
             android:exported="false" />

@@ -19,13 +19,12 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.ticketonlineapp.Activity.Booking.BookedActivity;
 import com.example.ticketonlineapp.Database.FirebaseRequests;
+import com.example.ticketonlineapp.Model.BookedInformation;
 import com.example.ticketonlineapp.Model.Cinema;
-import com.example.ticketonlineapp.Model.City;
 import com.example.ticketonlineapp.Model.Film;
-import com.example.ticketonlineapp.Model.InforBooked;
-import com.example.ticketonlineapp.Model.ScheduleFilm;
+import com.example.ticketonlineapp.Model.ScheduledFilm;
+
 import com.example.ticketonlineapp.R;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -79,31 +78,34 @@ public class TimeBookedAdapter extends RecyclerView.Adapter<TimeBookedAdapter.Vi
                                 TextView tv = (TextView) prevView.findViewById(R.id.cinemaName);
                                 RecyclerView rv = (RecyclerView) prevView.findViewById(R.id.listTime);
                                 Log.e("f", tv.getText().toString());
-                                if(InforBooked.getInstance().prevPosition >-1){
-                                    View v = rv.getLayoutManager().findViewByPosition(InforBooked.getInstance().prevPosition);
+                                if(BookedInformation.getInstance().prevPosition >-1){
+                                    View v = rv.getLayoutManager().findViewByPosition(BookedInformation.getInstance().prevPosition);
+
                                     Button btn  = v.findViewById(R.id.dateBtn);
                                     btn.setBackgroundColor(Color.TRANSPARENT);
                                     btn.setBackground(ContextCompat.getDrawable(dateBtn.getContext(), R.drawable.bg_tabview_button));
                                 }
                             }
                             // }
-                            InforBooked.getInstance().isTimeSelected = true;
-                            InforBooked.getInstance().timeBooked = dateBtn.getText().toString();
-                            InforBooked.getInstance().cinema = cinema;
+                            BookedInformation.getInstance().isTimeSelected = true;
+                            BookedInformation.getInstance().timeBooked = dateBtn.getText().toString();
+                            BookedInformation.getInstance().cinema = cinema;
                         }
                         prevType = cinema.getName();
                         prevView = timeView;
-                        InforBooked.getInstance().prevPosition = getAdapterPosition();
+                        BookedInformation.getInstance().prevPosition = getAdapterPosition();
 
                     }
 
-                    else InforBooked.getInstance().dateBooked = dateBtn.getText().toString();
+                    else BookedInformation.getInstance().dateBooked = dateBtn.getText().toString();
                     if(film != null){
-                        ScheduleFilm.getInstance().dateBooked = InforBooked.getInstance().dateBooked;
-                        ScheduleFilm.getInstance().isDateSelected = true;
+                        ScheduledFilm.getInstance().dateBooked = BookedInformation.getInstance().dateBooked;
+                        ScheduledFilm.getInstance().isDateSelected = true;
                     }
 
-                    InforBooked.getInstance().isDateSelected = true;
+
+                    BookedInformation.getInstance().isDateSelected = true;
+
                     dateBtn.setBackgroundColor(Color.TRANSPARENT);
 
                     dateBtn.setBackground(ContextCompat.getDrawable(dateBtn.getContext(), R.drawable.background_button));
@@ -122,10 +124,11 @@ public class TimeBookedAdapter extends RecyclerView.Adapter<TimeBookedAdapter.Vi
                             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                                 List<DocumentSnapshot> listDocs = queryDocumentSnapshots.getDocuments();
 
-                                if(!InforBooked.getInstance().dateBooked.equals(null)){
+                                if(!BookedInformation.getInstance().dateBooked.equals(null)){
 
-                                    CinemaNameAdapter cinemaNameAdapter = new CinemaNameAdapter(activity, R.layout.cinema_booked_item,InforBooked.getInstance().listCinema, InforBooked.getInstance().film);
-                                    timelistView.setAdapter(cinemaNameAdapter);
+                                    CinemaNameAdapter CinemaNameAdapter = new CinemaNameAdapter(activity, R.layout.cinema_booked_item,BookedInformation.getInstance().listCinema, BookedInformation.getInstance().film);
+                                    timelistView.setAdapter(CinemaNameAdapter);
+
 
 
                                     // Helper.getListViewSize(timelistView, activity);
@@ -172,7 +175,9 @@ public class TimeBookedAdapter extends RecyclerView.Adapter<TimeBookedAdapter.Vi
         else{
             holder.dateBtn.setText(listDate.get(position));
 
-            if(holder.dateBtn.getText().toString().equals(InforBooked.getInstance().timeBooked) && cinema.getName().equals(prevType) ){
+
+            if(holder.dateBtn.getText().toString().equals(BookedInformation.getInstance().timeBooked) && cinema.getName().equals(prevType) ){
+
                 holder.dateBtn.setBackgroundColor(Color.TRANSPARENT);
                 holder.dateBtn.setBackground(ContextCompat.getDrawable(holder.dateBtn.getContext(), R.drawable.background_button));
             }
@@ -188,5 +193,5 @@ public class TimeBookedAdapter extends RecyclerView.Adapter<TimeBookedAdapter.Vi
         return listDate.size();
     }
 
-
 }
+

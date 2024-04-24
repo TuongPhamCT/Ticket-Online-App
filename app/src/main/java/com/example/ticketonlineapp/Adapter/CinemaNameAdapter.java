@@ -15,19 +15,22 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.ticketonlineapp.Activity.Cinema.CinemaLocationActivity;
 import com.example.ticketonlineapp.Database.FirebaseRequests;
+import com.example.ticketonlineapp.Model.BookedInformation;
 import com.example.ticketonlineapp.Model.Cinema;
 import com.example.ticketonlineapp.Model.Film;
-import com.example.ticketonlineapp.Model.InforBooked;
-import com.example.ticketonlineapp.Model.ScheduleFilm;
+import com.example.ticketonlineapp.Model.ScheduledFilm;
+
 import com.example.ticketonlineapp.Model.ShowTime;
 import com.example.ticketonlineapp.Model.Users;
 import com.example.ticketonlineapp.R;
@@ -36,21 +39,32 @@ import com.google.android.flexbox.FlexboxLayoutManager;
 import com.google.android.flexbox.JustifyContent;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.ktx.Firebase;
+
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionDeniedResponse;
 import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.single.PermissionListener;
+
+import org.w3c.dom.Document;
 
 import java.io.IOException;
 import java.text.DateFormat;
@@ -104,11 +118,11 @@ public class CinemaNameAdapter extends ArrayAdapter<Cinema> {
         ConstraintLayout cinemaCl = itemView.findViewById(R.id.cinemaCl);
         List<String> listTime = new ArrayList<String>();
 
-        InforBooked.getInstance().listCinema = listCinema;
+        BookedInformation.getInstance().listCinema = listCinema;
         Cinema item = getItem(position);
         client = LocationServices.getFusedLocationProviderClient(context);
 
-        if((InforBooked.getInstance().isCitySelected && InforBooked.getInstance().isDateSelected) || (ScheduleFilm.getInstance().isCitySelected && ScheduleFilm.getInstance().isDateSelected)) {
+        if((BookedInformation.getInstance().isCitySelected && BookedInformation.getInstance().isDateSelected) || (ScheduledFilm.getInstance().isCitySelected && ScheduledFilm.getInstance().isDateSelected)) {
             distance.setVisibility(View.VISIBLE);
             showHideBtn.setVisibility(View.VISIBLE);
         }
@@ -155,7 +169,8 @@ public class CinemaNameAdapter extends ArrayAdapter<Cinema> {
                 if(Users.currentUser!=null)
                     if(((Users.currentUser.getAccountType().toString()).equals("admin")))
                     {
-                        if(ScheduleFilm.getInstance().isDateSelected && ScheduleFilm.getInstance().isCitySelected){
+                        if(ScheduledFilm.getInstance().isDateSelected && ScheduledFilm.getInstance().isCitySelected){
+
                             for (int i = 10; i <= 20;i++){
                                 for (int j = 0; j <60; j=j+15)
                                 {
@@ -206,7 +221,8 @@ public class CinemaNameAdapter extends ArrayAdapter<Cinema> {
                     else {
                         Query query = FirebaseRequests.database.collection("Showtime").orderBy("timeBooked");
 
-                        if(InforBooked.getInstance().isDateSelected && InforBooked.getInstance().isCitySelected){
+                        if(BookedInformation.getInstance().isDateSelected && BookedInformation.getInstance().isCitySelected){
+
 
                             query.addSnapshotListener(new EventListener<QuerySnapshot>() {
                                 @Override
@@ -216,7 +232,8 @@ public class CinemaNameAdapter extends ArrayAdapter<Cinema> {
 
                                         DateFormat dateFormat = new SimpleDateFormat("EEE\nd", Locale.ENGLISH);
 
-                                        if(doc.get("cinemaID").equals(item.getCinemaID()) && doc.get("filmID").equals(film.getId()) && dateFormat.format(time.toDate()).equals(InforBooked.getInstance().dateBooked)){
+                                        if(doc.get("cinemaID").equals(item.getCinemaID()) && doc.get("filmID").equals(film.getId()) && dateFormat.format(time.toDate()).equals(BookedInformation.getInstance().dateBooked)){
+
                                             DateFormat timeFormat = new SimpleDateFormat("HH:mm", Locale.ENGLISH);
                                             listTime.add(timeFormat.format(time.toDate()));
                                         }
@@ -237,7 +254,9 @@ public class CinemaNameAdapter extends ArrayAdapter<Cinema> {
                                     layoutManager.setFlexDirection(FlexDirection.ROW);
                                     layoutManager.setJustifyContent(JustifyContent.FLEX_START);
                                     recyclerView.setLayoutManager(layoutManager);
-                                    if(!InforBooked.getInstance().isCitySelected || !InforBooked.getInstance().isDateSelected){
+
+                                    if(!BookedInformation.getInstance().isCitySelected || !BookedInformation.getInstance().isDateSelected){
+
                                         recyclerView.setAdapter(new TimeBookedAdapter(new ArrayList<String>(), null,null, item, itemView, null, null));
                                     }
                                     else recyclerView.setAdapter(new TimeBookedAdapter(listTime, null,null, item, itemView, null, null));
@@ -253,7 +272,8 @@ public class CinemaNameAdapter extends ArrayAdapter<Cinema> {
 
                         }
                     }
-                locationLayout.setOnClickListener(new View.OnClickListener() {
+                /*locationLayout.setOnClickListener(new View.OnClickListener() {
+
                     @Override
                     public void onClick(View view) {
                         List<Address> listAddress = new ArrayList<>();
@@ -261,7 +281,9 @@ public class CinemaNameAdapter extends ArrayAdapter<Cinema> {
                         intent.putExtra("cinema", item);
                         context.startActivity(intent);
                     }
-                });
+
+                });*/
+
                 cinemaCl.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -291,7 +313,8 @@ public class CinemaNameAdapter extends ArrayAdapter<Cinema> {
                         for(DocumentSnapshot doc : listDocs){
                             Timestamp time = doc.getTimestamp("timeBooked");
                             DateFormat dateFormat = new SimpleDateFormat("EEE\nd", Locale.ENGLISH);
-                            if(doc.get("cinemaID").equals(item.getCinemaID()) && doc.get("filmID").equals(film.getId()) && dateFormat.format(time.toDate()).equals(InforBooked.getInstance().dateBooked)){
+                            if(doc.get("cinemaID").equals(item.getCinemaID()) && doc.get("filmID").equals(film.getId()) && dateFormat.format(time.toDate()).equals(BookedInformation.getInstance().dateBooked)){
+
                                 DateFormat timeFormat = new SimpleDateFormat("HH:mm", Locale.ENGLISH);
                                 listTime.add(timeFormat.format(time.toDate()));
                             }
