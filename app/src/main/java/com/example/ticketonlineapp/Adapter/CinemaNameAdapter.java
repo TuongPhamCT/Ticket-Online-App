@@ -17,6 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -29,6 +30,7 @@ import com.example.ticketonlineapp.Model.BookedInformation;
 import com.example.ticketonlineapp.Model.Cinema;
 import com.example.ticketonlineapp.Model.Film;
 import com.example.ticketonlineapp.Model.ScheduledFilm;
+
 import com.example.ticketonlineapp.Model.ShowTime;
 import com.example.ticketonlineapp.Model.Users;
 import com.example.ticketonlineapp.R;
@@ -43,6 +45,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
@@ -53,6 +56,7 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.ktx.Firebase;
+
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionDeniedResponse;
@@ -166,6 +170,7 @@ public class CinemaNameAdapter extends ArrayAdapter<Cinema> {
                     if(((Users.currentUser.getAccountType().toString()).equals("admin")))
                     {
                         if(ScheduledFilm.getInstance().isDateSelected && ScheduledFilm.getInstance().isCitySelected){
+
                             for (int i = 10; i <= 20;i++){
                                 for (int j = 0; j <60; j=j+15)
                                 {
@@ -218,6 +223,7 @@ public class CinemaNameAdapter extends ArrayAdapter<Cinema> {
 
                         if(BookedInformation.getInstance().isDateSelected && BookedInformation.getInstance().isCitySelected){
 
+
                             query.addSnapshotListener(new EventListener<QuerySnapshot>() {
                                 @Override
                                 public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
@@ -227,6 +233,7 @@ public class CinemaNameAdapter extends ArrayAdapter<Cinema> {
                                         DateFormat dateFormat = new SimpleDateFormat("EEE\nd", Locale.ENGLISH);
 
                                         if(doc.get("cinemaID").equals(item.getCinemaID()) && doc.get("filmID").equals(film.getId()) && dateFormat.format(time.toDate()).equals(BookedInformation.getInstance().dateBooked)){
+
                                             DateFormat timeFormat = new SimpleDateFormat("HH:mm", Locale.ENGLISH);
                                             listTime.add(timeFormat.format(time.toDate()));
                                         }
@@ -247,7 +254,9 @@ public class CinemaNameAdapter extends ArrayAdapter<Cinema> {
                                     layoutManager.setFlexDirection(FlexDirection.ROW);
                                     layoutManager.setJustifyContent(JustifyContent.FLEX_START);
                                     recyclerView.setLayoutManager(layoutManager);
+
                                     if(!BookedInformation.getInstance().isCitySelected || !BookedInformation.getInstance().isDateSelected){
+
                                         recyclerView.setAdapter(new TimeBookedAdapter(new ArrayList<String>(), null,null, item, itemView, null, null));
                                     }
                                     else recyclerView.setAdapter(new TimeBookedAdapter(listTime, null,null, item, itemView, null, null));
@@ -264,6 +273,7 @@ public class CinemaNameAdapter extends ArrayAdapter<Cinema> {
                         }
                     }
                 /*locationLayout.setOnClickListener(new View.OnClickListener() {
+
                     @Override
                     public void onClick(View view) {
                         List<Address> listAddress = new ArrayList<>();
@@ -271,7 +281,9 @@ public class CinemaNameAdapter extends ArrayAdapter<Cinema> {
                         intent.putExtra("cinema", item);
                         context.startActivity(intent);
                     }
+
                 });*/
+
                 cinemaCl.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -302,6 +314,7 @@ public class CinemaNameAdapter extends ArrayAdapter<Cinema> {
                             Timestamp time = doc.getTimestamp("timeBooked");
                             DateFormat dateFormat = new SimpleDateFormat("EEE\nd", Locale.ENGLISH);
                             if(doc.get("cinemaID").equals(item.getCinemaID()) && doc.get("filmID").equals(film.getId()) && dateFormat.format(time.toDate()).equals(BookedInformation.getInstance().dateBooked)){
+
                                 DateFormat timeFormat = new SimpleDateFormat("HH:mm", Locale.ENGLISH);
                                 listTime.add(timeFormat.format(time.toDate()));
                             }

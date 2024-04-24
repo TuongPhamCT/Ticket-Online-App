@@ -17,6 +17,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cinemaCl"
             android:layout_width="match_parent"
+
             android:layout_height="match_parent">
 
             <TextView
@@ -26,6 +27,7 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
 
             <TextView
                 android:id="@+id/distance"
@@ -94,6 +96,7 @@
                         android:fontFamily="@font/montserrat500"
                         android:text="Navigate"
                         android:textSize="12dp" />
+
                 </LinearLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -105,6 +108,7 @@
                 android:nestedScrollingEnabled="false"
                 android:scrollbars="none"
                 app:layoutManager="com.google.android.flexbox.FlexboxLayoutManager" />
+
         </LinearLayout>
 
 

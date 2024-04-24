@@ -24,6 +24,7 @@ import com.example.ticketonlineapp.Model.BookedInformation;
 import com.example.ticketonlineapp.Model.Cinema;
 import com.example.ticketonlineapp.Model.Film;
 import com.example.ticketonlineapp.Model.ScheduledFilm;
+
 import com.example.ticketonlineapp.R;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -79,6 +80,7 @@ public class TimeBookedAdapter extends RecyclerView.Adapter<TimeBookedAdapter.Vi
                                 Log.e("f", tv.getText().toString());
                                 if(BookedInformation.getInstance().prevPosition >-1){
                                     View v = rv.getLayoutManager().findViewByPosition(BookedInformation.getInstance().prevPosition);
+
                                     Button btn  = v.findViewById(R.id.dateBtn);
                                     btn.setBackgroundColor(Color.TRANSPARENT);
                                     btn.setBackground(ContextCompat.getDrawable(dateBtn.getContext(), R.drawable.bg_tabview_button));
@@ -103,6 +105,7 @@ public class TimeBookedAdapter extends RecyclerView.Adapter<TimeBookedAdapter.Vi
 
 
                     BookedInformation.getInstance().isDateSelected = true;
+
                     dateBtn.setBackgroundColor(Color.TRANSPARENT);
 
                     dateBtn.setBackground(ContextCompat.getDrawable(dateBtn.getContext(), R.drawable.background_button));
@@ -125,6 +128,7 @@ public class TimeBookedAdapter extends RecyclerView.Adapter<TimeBookedAdapter.Vi
 
                                     CinemaNameAdapter CinemaNameAdapter = new CinemaNameAdapter(activity, R.layout.cinema_booked_item,BookedInformation.getInstance().listCinema, BookedInformation.getInstance().film);
                                     timelistView.setAdapter(CinemaNameAdapter);
+
 
 
                                     // Helper.getListViewSize(timelistView, activity);
@@ -171,7 +175,9 @@ public class TimeBookedAdapter extends RecyclerView.Adapter<TimeBookedAdapter.Vi
         else{
             holder.dateBtn.setText(listDate.get(position));
 
+
             if(holder.dateBtn.getText().toString().equals(BookedInformation.getInstance().timeBooked) && cinema.getName().equals(prevType) ){
+
                 holder.dateBtn.setBackgroundColor(Color.TRANSPARENT);
                 holder.dateBtn.setBackground(ContextCompat.getDrawable(holder.dateBtn.getContext(), R.drawable.background_button));
             }
@@ -187,5 +193,5 @@ public class TimeBookedAdapter extends RecyclerView.Adapter<TimeBookedAdapter.Vi
         return listDate.size();
     }
 
-
 }
+
