@@ -102,7 +102,7 @@
             android:singleLine="false"
             android:textColor="@color/white"
             android:textFontWeight="600"
-            android:textSize="16dp"></TextView>
+            android:textSize="16dp" />
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="wrap_content"

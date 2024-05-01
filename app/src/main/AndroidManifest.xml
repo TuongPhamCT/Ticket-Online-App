@@ -66,9 +66,6 @@
             android:name=".Activity.Booking.ShowTimeScheduleActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.Booking.BookedActivity"
-            android:exported="false" />
-        <activity
             android:name=".Activity.Discount.AddDiscountActivity"
             android:exported="false" />
         <activity
