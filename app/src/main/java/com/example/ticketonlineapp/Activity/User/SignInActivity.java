@@ -1,17 +1,11 @@
 package com.example.ticketonlineapp.Activity.User;
 
 import static android.content.ContentValues.TAG;
-
 import static com.example.ticketonlineapp.Database.FirebaseRequests.mAuth;
 
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.IntentFilter;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -33,6 +27,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.ticketonlineapp.Activity.HomeActivity;
 import com.example.ticketonlineapp.Activity.Network.CheckNetwork;
@@ -111,7 +109,6 @@ public class SignInActivity extends AppCompatActivity {
         layoutElement.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // An ban phim khi cham vao khoang trong tren man hinh
                 InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
             }

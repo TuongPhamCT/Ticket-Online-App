@@ -77,7 +77,6 @@ public class SplashActivity extends AppCompatActivity {
                 boolean IsUsed = sharedPref.getBoolean(String.valueOf(R.string.CheckUsed),false);
                 if(IsUsed) {
                     if (mAuth.getCurrentUser() != null) {
-
                         i = new Intent(SplashActivity.this, HomeActivity.class);
                     }
                     else
