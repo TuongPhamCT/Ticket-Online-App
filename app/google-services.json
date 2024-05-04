@@ -12,7 +12,20 @@
           "package_name": "com.example.ticketonlineapp"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "154016756693-okhlcrbqt8ofmms18tsgsele4jc3g6k7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.ticketonlineapp",
+            "certificate_hash": "c694970e06d11982a6434babfe0045f41815ce05"
+          }
+        },
+        {
+          "client_id": "154016756693-9bttk960qik82vukbbvln88s448af3f7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyAD8knnBvS6cYOe6LmvCfMNQCjv7hhjKco"
@@ -20,7 +33,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "154016756693-9bttk960qik82vukbbvln88s448af3f7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
