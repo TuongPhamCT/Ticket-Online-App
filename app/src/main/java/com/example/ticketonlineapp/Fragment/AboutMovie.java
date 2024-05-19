@@ -17,7 +17,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.ticketonlineapp.Activity.Booking.BookedActivity;
+import com.example.ticketonlineapp.Activity.Booking.SelectCinemaActivity;
 import com.example.ticketonlineapp.Activity.Booking.ShowTimeScheduleActivity;
 import com.example.ticketonlineapp.Adapter.Helper;
 import com.example.ticketonlineapp.Adapter.VideoAdapter;
@@ -120,7 +120,7 @@ public class AboutMovie extends Fragment {
     }
     void book()
     {
-        Intent i = new Intent(getView().getContext(), BookedActivity.class);
+        Intent i = new Intent(getView().getContext(), SelectCinemaActivity.class);
         i.putExtra("selectedFilm", film);
         i.putExtra("nameFilm", film.getName());
         getView().getContext().startActivity(i);

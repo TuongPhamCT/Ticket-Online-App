@@ -54,7 +54,7 @@ public class SliderAdapter extends RecyclerView.Adapter<SliderAdapter.sliderView
         holder.rating.setRating(vote);
         holder.ratingPoint.setText(df.format(vote)+"");
         Film f =listPosts.get(position);
-        Log.e("ddf", f.getBackGroundImage());
+        Log.e("movieBackgroundImg:", f.getBackGroundImage()==null? "null":f.getBackGroundImage());
         holder.view.setOnClickListener(view -> {
             Intent i = new Intent(holder.view.getContext(), InformationFilmActivity.class);
             i.putExtra(ExtraIntent.film, f);
