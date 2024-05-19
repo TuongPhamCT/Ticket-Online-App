@@ -88,4 +88,18 @@ public class Users {
     public String getEmail(){
         return  Email;
     };
+
+    @Override
+    public String toString() {
+        return "Users{" +
+                "UserID='" + UserID + '\'' +
+                ", Name='" + Name + '\'' +
+                ", Email='" + Email + '\'' +
+                ", Wallet=" + Wallet +
+                ", accountType='" + accountType + '\'' +
+                ", avatar='" + avatar + '\'' +
+                ", likeComments=" + likeComments +
+                ", dislikeComments=" + dislikeComments +
+                '}';
+    }
 }

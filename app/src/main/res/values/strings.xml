@@ -62,4 +62,10 @@
     <string name="update_my_account">Update My Account</string>
     <string name="student">Student</string>
     <!--    -->
+
+    <!--facebook key-->
+    <string name="facebook_app_id">984696693270026</string>
+    <string name="fb_login_protocol_scheme">fb984696693270026</string>
+    <string name="facebook_client_token">71ebfcd39435df7d461f1f01c44990e8</string>
+    <!--<string name="default_web_client_id">154016756693-9bttk960qik82vukbbvln88s448af3f7.apps.googleusercontent.com</string>-->
 </resources>
