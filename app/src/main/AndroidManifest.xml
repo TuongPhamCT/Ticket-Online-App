@@ -25,31 +25,31 @@
         <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
         <meta-data android:name="com.facebook.sdk.ClientToken" android:value="@string/facebook_client_token"/>
         <activity
-            android:name=".ServiceViewAll"
+            android:name=".Activity.Service.ServiceViewAll"
             android:exported="false" />
         <activity
-            android:name=".AddServiceActivity"
+            android:name=".Activity.Service.AddServiceActivity"
             android:exported="false" />
         <activity
-            android:name=".AddCityActivity"
+            android:name=".Activity.City.AddCityActivity"
             android:exported="false" />
         <activity
-            android:name=".CinemaOfCity"
+            android:name=".Activity.City.CinemaOfCity"
             android:exported="false" />
         <activity
-            android:name=".CityViewAllActivity"
+            android:name=".Activity.City.CityViewAllActivity"
             android:exported="false" />
         <activity
-            android:name=".SearchActivity"
+            android:name=".Activity.Movie.SearchActivity"
             android:exported="false" />
         <activity
-            android:name=".EditProfileActivity"
+            android:name=".Activity.User.EditProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".ChangePasswordActivity"
+            android:name=".Activity.User.ChangePasswordActivity"
             android:exported="false" />
         <activity
-            android:name=".AccountActivity"
+            android:name=".Activity.User.AccountActivity"
             android:exported="false" />
         <activity
             android:name=".Activity.Cinema.CinemaLocationActivity"
@@ -58,7 +58,7 @@
             android:name=".Activity.Booking.SelectCinemaActivity"
             android:exported="true" />
         <activity
-            android:name=".Activity.User.SplashActivity"
+            android:name=".Activity.User.SignInActivity"
             android:exported="true">
 
         </activity>
@@ -110,7 +110,7 @@
             android:name=".Activity.Ticket.MyTicketActivity"
             android:exported="true" />
         <activity
-            android:name=".Activity.User.SignInActivity"
+            android:name=".Activity.User.SplashActivity"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
