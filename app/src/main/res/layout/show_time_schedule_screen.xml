@@ -85,7 +85,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:background="@drawable/button_background"
+        android:background="@drawable/background_button"
         android:fontFamily="@font/montserrat_regular"
         android:gravity="center"
         android:text="Create"

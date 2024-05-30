@@ -44,7 +44,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="80dp"
             android:layout_marginTop="20dp"
-            android:background="@drawable/button_background"
+            android:background="@drawable/background_button"
             android:fontFamily="@font/montserrat_regular"
             android:gravity="center"
             android:text="Try Again"
