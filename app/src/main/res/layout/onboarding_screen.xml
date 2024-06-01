@@ -49,24 +49,22 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/experienceText" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/getStartedBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="72dp"
-        android:background="@drawable/onboarding_button"
-        android:backgroundTint="@null"
-        android:paddingHorizontal="75dp"
         android:text="Get Started"
-        android:autoSizeMaxTextSize="18dp"
-        android:autoSizeMinTextSize="18dp"
+        android:paddingHorizontal="75dp"
+        android:background="@drawable/background_button"
         android:textColor="@color/white"
         app:layout_constraintCircleRadius="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
         android:textAllCaps="false"
-        android:textSize="14dp"/>
+        android:textSize="14dp"
+        />
 
     <TextView
         android:id="@+id/textView2"

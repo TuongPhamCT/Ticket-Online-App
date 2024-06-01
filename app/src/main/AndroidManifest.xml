@@ -135,7 +135,7 @@
             android:exported="false" />
         <activity
             android:name=".Activity.User.OnboardingActivity"
-            android:exported="false" />
+            android:exported="false"/>
         <activity
             android:name=".Activity.User.SignUpActivity"
             android:exported="false" />

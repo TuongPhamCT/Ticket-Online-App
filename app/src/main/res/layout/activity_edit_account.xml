@@ -118,7 +118,7 @@
                 android:textSize="14sp" />
 
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/UpdateBtn"
                 style="@android:style/Widget.Button"
                 android:layout_width="255dp"
