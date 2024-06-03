@@ -132,7 +132,7 @@ Thông báo
 ### Installation
 
 1. Tải Android Studio từ [the Android Studio website](https://developer.android.com/studio).
-2. Tải Movie Ticket App Source :  https://github.com/ManhHoDinh/MovieTicketApp
+2. Tải Movie Ticket App Source :  [Source Code](https://github.com/TuongPhamCT/Ticket-Online-App)
 3. Trong dự án, nháy chọn Sync Project with Gradle Files để khởi chạy những thư viện cần thiết.
 5. Chạy ứng dụng bằng cách nháy chọn Run "app" hoặc tổ hợp phím Shift+F10. Ứng dụng sẽ được chạy trên thiết bị (thật hoặc ảo) của bạn.
 
