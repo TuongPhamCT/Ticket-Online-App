@@ -117,6 +117,10 @@ Quản lý phiếu giảm giá
 
 Quản lí bắp nước
 
+Quản lí ví tiền
+
+Thông báo
+
 
 <div id="CaiDat"></div>
 
