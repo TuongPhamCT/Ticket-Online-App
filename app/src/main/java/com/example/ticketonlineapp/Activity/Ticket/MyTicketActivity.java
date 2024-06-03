@@ -14,6 +14,8 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.example.ticketonlineapp.Activity.HomeActivity;
+import com.example.ticketonlineapp.Activity.Notification.NotificationActivity;
+import com.example.ticketonlineapp.Activity.Report.ReportActivity;
 import com.example.ticketonlineapp.Activity.Wallet.MyWalletActivity;
 import com.example.ticketonlineapp.Adapter.TicketListAdapter;
 import com.example.ticketonlineapp.Database.FirebaseRequests;
@@ -129,14 +131,14 @@ public class MyTicketActivity extends AppCompatActivity {
                     startActivity(new Intent(MyTicketActivity.this, MyWalletActivity.class));
                     overridePendingTransition(0,0);
                     break;
-        //        case R.id.ReportPage:
-          //          startActivity(new Intent(MyTicketActivity.this, ReportActivity.class));
-            //        overridePendingTransition(0,0);
-              //      break;
-                //case R.id.NotificationPage:
-                  //  startActivity(new Intent(MyTicketActivity.this, NotificationActivity.class));
-                    //overridePendingTransition(0, 0);
-                   // break;
+                case R.id.ReportPage:
+                    startActivity(new Intent(MyTicketActivity.this, ReportActivity.class));
+                    overridePendingTransition(0,0);
+                    break;
+                case R.id.NotificationPage:
+                    startActivity(new Intent(MyTicketActivity.this, NotificationActivity.class));
+                    overridePendingTransition(0, 0);
+                    break;
             }
             return true;
         });
