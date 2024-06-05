@@ -25,6 +25,7 @@ import com.example.ticketonlineapp.Activity.HomeActivity;
 //import com.example.ticketonlineapp.Activity.Notification.NotificationActivity;
 //import com.example.ticketonlineapp.Activity.Ticket.MyTicketAllActivity;
 //import com.example.ticketonlineapp.Adapter.MovieBookedAdapter;
+import com.example.ticketonlineapp.Activity.Notification.NotificationActivity;
 import com.example.ticketonlineapp.Activity.Ticket.MyTicketActivity;
 import com.example.ticketonlineapp.Database.FirebaseRequests;
 //import com.example.ticketonlineapp.Model.FilmModel;
@@ -120,8 +121,8 @@ public class MyWalletActivity extends AppCompatActivity {
                     overridePendingTransition(0,0);
                     break;
                 case R.id.NotificationPage:
-//                    startActivity(new Intent(MyWalletActivity.this, NotificationActivity.class));
-//                    overridePendingTransition(0, 0);
+                    startActivity(new Intent(MyWalletActivity.this, NotificationActivity.class));
+                    overridePendingTransition(0, 0);
                     break;
 
             }
