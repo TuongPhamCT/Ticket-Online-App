@@ -31,7 +31,7 @@ import com.example.ticketonlineapp.Database.FirebaseRequests;
 import com.example.ticketonlineapp.Model.Cinema;
 import com.example.ticketonlineapp.Model.City;
 import com.example.ticketonlineapp.Model.Film;
-import com.example.ticketonlineapp.Model.ScheduleFilm;
+import com.example.ticketonlineapp.Model.ScheduledFilm;
 import com.example.ticketonlineapp.Model.ShowTime;
 import com.example.ticketonlineapp.R;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -100,13 +100,14 @@ public class ShowTimeScheduleActivity extends AppCompatActivity {
             countDate++;
             countTime++;
         }
-
+//        String[] listCinemaName = {"Central Park CGV", "FX Sudirman XXI", "Kelapa Gading IMAX"};
         cinemaLv = (ListView) findViewById(R.id.cinemaLv);
+//        cinemaLv.setAdapter(new CinemaNameAdapter(this, listCinemaName, listCinemaName, selectedFilm));
 
         dayRecycleView.setAdapter(new TimeBookedAdapter(listDate, listTime, selectedFilm, null, null, cinemaLv, ShowTimeScheduleActivity.this));
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         dayRecycleView.setLayoutManager(layoutManager);
-        // String[] listCinemaName = {"Central Park CGV", "FX Sudirman XXI", "Kelapa Gading IMAX"};
+
 
         nameFilmTv = (TextView) findViewById(R.id.nameFilmtv);
         nameFilmTv.setText(selectedFilm.getName());
@@ -115,7 +116,7 @@ public class ShowTimeScheduleActivity extends AppCompatActivity {
         createBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(ScheduleFilm.getInstance().listShowTime.size() == 0){
+                if(ScheduledFilm.getInstance().listShowTime.isEmpty()){
                     Toast.makeText(ShowTimeScheduleActivity.this, "Please choose showtime!", Toast.LENGTH_SHORT).show();
                 }
                 else{
@@ -132,16 +133,16 @@ public class ShowTimeScheduleActivity extends AppCompatActivity {
                         confirmDialog.show();
                         TextView confirmTv = confirmDialog.findViewById(R.id.confirmTv);
                         TextView cancelTv = confirmDialog.findViewById(R.id.cancelTv);
-                        Log.e("te", ScheduleFilm.getInstance().listShowTime.size()+"");
+                        Log.e("te", ScheduledFilm.getInstance().listShowTime.size()+"");
                         confirmTv.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                for(ShowTime showTime : ScheduleFilm.getInstance().listShowTime){
+                                for(ShowTime showTime : ScheduledFilm.getInstance().listShowTime){
                                     FirebaseRequests.database.collection("Showtime").document().set(showTime);
 
                                 }
 
-                                ScheduleFilm.getInstance().listShowTime = new ArrayList<ShowTime>();
+                                ScheduledFilm.getInstance().listShowTime = new ArrayList<ShowTime>();
                                 loadListCity();
 //                            ScheduleFilm.getInstance().isCitySelected = false;
 //                            ScheduleFilm.getInstance().isDateSelected = false;
@@ -165,9 +166,9 @@ public class ShowTimeScheduleActivity extends AppCompatActivity {
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ScheduleFilm.getInstance().listShowTime = new ArrayList<ShowTime>();
-                ScheduleFilm.getInstance().isDateSelected = false;
-                ScheduleFilm.getInstance().isCitySelected = false;
+                ScheduledFilm.getInstance().listShowTime = new ArrayList<ShowTime>();
+                ScheduledFilm.getInstance().isDateSelected = false;
+                ScheduledFilm.getInstance().isCitySelected = false;
                 finish();
             }
         });
@@ -203,7 +204,7 @@ public class ShowTimeScheduleActivity extends AppCompatActivity {
                                         countryAutoTv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                             @Override
                                             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                                                ScheduleFilm.getInstance().isCitySelected = true;
+                                                ScheduledFilm.getInstance().isCitySelected = true;
                                                 List<Cinema> listCinema = new ArrayList<Cinema>();
                                                 FirebaseRequests.database.collection("Cinema").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                                                     @Override
@@ -215,9 +216,10 @@ public class ShowTimeScheduleActivity extends AppCompatActivity {
                                                             }
                                                         }
 
+
                                                         cinemaNameAdapter = new CinemaNameAdapter(ShowTimeScheduleActivity.this, R.layout.cinema_booked_item, listCinema, selectedFilm);
                                                         cinemaLv.setAdapter(cinemaNameAdapter);
-
+//                                                        cinemaLv.setAdapter(new ArrayAdapter<Cinema>(ShowTimeScheduleActivity.this, R.layout.test_item, listCinema));
 
                                                     }
                                                 });

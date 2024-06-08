@@ -98,8 +98,8 @@ public class CinemaLocationActivity extends FragmentActivity implements OnMapRea
 
         Intent intent = getIntent();
 
-        //Cinema cinema = intent.getParcelableExtra("cinema");
-        Cinema cinema = new Cinema("1" , "1" , "1" , "1" , 1 , "1" , "1" );
+        Cinema cinema = intent.getParcelableExtra("cinema");
+//        Cinema cinema = new Cinema("1" , "1" , "1" , "1" , 1 , "1" , "1" );
 
         location = cinema.getName();
 
