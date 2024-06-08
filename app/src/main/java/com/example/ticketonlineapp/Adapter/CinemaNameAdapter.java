@@ -25,6 +25,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.ticketonlineapp.Activity.Cinema.CinemaLocationActivity;
 import com.example.ticketonlineapp.Database.FirebaseRequests;
 import com.example.ticketonlineapp.Model.BookedInformation;
 import com.example.ticketonlineapp.Model.Cinema;
@@ -272,7 +273,7 @@ public class CinemaNameAdapter extends ArrayAdapter<Cinema> {
 
                         }
                     }
-                /*locationLayout.setOnClickListener(new View.OnClickListener() {
+                locationLayout.setOnClickListener(new View.OnClickListener() {
 
                     @Override
                     public void onClick(View view) {
@@ -282,7 +283,7 @@ public class CinemaNameAdapter extends ArrayAdapter<Cinema> {
                         context.startActivity(intent);
                     }
 
-                });*/
+                });
 
                 cinemaCl.setOnClickListener(new View.OnClickListener() {
                     @Override
