@@ -55,6 +55,9 @@
             android:name=".Activity.Cinema.CinemaLocationActivity"
             android:exported="true" />
         <activity
+            android:name=".Activity.Cinema.AddCinemaActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activity.Booking.SelectCinemaActivity"
             android:exported="true" />
         <activity
