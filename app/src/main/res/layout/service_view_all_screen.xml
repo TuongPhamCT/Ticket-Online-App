@@ -56,14 +56,7 @@
                         app:cardCornerRadius="100dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent">
-                        <ImageView
-                            android:id="@+id/accountImage"
-                            android:layout_width="48dp"
-                            android:layout_height="48dp"
-                            android:layout_gravity="end"
-                            android:src="@drawable/avatar" />
-                    </androidx.cardview.widget.CardView>
+                        app:layout_constraintBottom_toBottomOf="parent"/>
                 </androidx.constraintlayout.widget.ConstraintLayout>
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/ServiceView"
