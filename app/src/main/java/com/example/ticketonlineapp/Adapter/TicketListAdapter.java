@@ -1,6 +1,7 @@
 package com.example.ticketonlineapp.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +11,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.example.ticketonlineapp.Activity.Movie.InformationFilmActivity;
+import com.example.ticketonlineapp.Activity.Ticket.TicketDetailActivity;
 import com.example.ticketonlineapp.Database.FirebaseRequests;
+import com.example.ticketonlineapp.Model.ExtraIntent;
 import com.example.ticketonlineapp.Model.Ticket;
 import com.example.ticketonlineapp.R;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -45,6 +49,13 @@ public class TicketListAdapter extends ArrayAdapter<Ticket> {
         View v;
         v = LayoutInflater.from(this.getContext()).inflate(R.layout.list_ticket_view, null);
         Ticket ve = getItem(position);
+
+        v.setOnClickListener(v1 -> {
+            Intent i = new Intent(v.getContext(), TicketDetailActivity.class);
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            i.putExtra("ticket", ve);
+            v.getContext().startActivity(i);
+        });
 
         if (ve!=null) {
             TextView nameTextView = (TextView) v.findViewById(R.id.tvName);
@@ -81,4 +92,5 @@ public class TicketListAdapter extends ArrayAdapter<Ticket> {
         }
         return v;
     }
+
 }
