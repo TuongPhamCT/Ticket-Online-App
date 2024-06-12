@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
@@ -31,6 +32,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
+import androidx.appcompat.widget.ThemeUtils;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
@@ -182,8 +184,7 @@ public class ReportActivity extends AppCompatActivity {
         int year = calendar.get(Calendar.YEAR);
         int month = calendar.get(Calendar.MONTH);
         int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
-
-        DatePickerDialog datePickerDialog = new DatePickerDialog(ReportActivity.this,
+        DatePickerDialog datePickerDialog = new DatePickerDialog(ReportActivity.this,R.style.CustomDatePickerDialog,
                 new DatePickerDialog.OnDateSetListener() {
 
                     @Override
@@ -227,7 +228,6 @@ public class ReportActivity extends AppCompatActivity {
                 negativeButton.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.grey_background_1));
             }
         };
-
         datePickerDialog.show();
     }
     private void showEndDateCalendarDialog() {
@@ -239,7 +239,7 @@ public class ReportActivity extends AppCompatActivity {
         int month = calendar.get(Calendar.MONTH);
         int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
 
-        DatePickerDialog datePickerDialog = new DatePickerDialog(ReportActivity.this,
+        DatePickerDialog datePickerDialog = new DatePickerDialog(ReportActivity.this,R.style.CustomDatePickerDialog,
                 new DatePickerDialog.OnDateSetListener() {
 
                     @Override
